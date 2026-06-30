@@ -35,6 +35,13 @@ const safeUrl = (value) => {
   }
 };
 
+const phoneHref = (value = "") => {
+  const phone = String(value).trim();
+  if (!phone) return "";
+  const normalized = phone.replace(/[^\d+]/g, "");
+  return normalized ? `tel:${normalized.startsWith("+") ? normalized : normalized}` : "";
+};
+
 const imageUrl = (image, fallback = fallbackEventImageUrl) => image?.asset?.url || fallback;
 const nextEventPath = "#/evenemang/nasta";
 
@@ -87,6 +94,9 @@ async function fetchSanityContent() {
       heroImage{asset->{url}, alt},
       address,
       contactEmail,
+      contact,
+      importantLinks,
+      association,
       seoDescription
     },
     "events": *[
@@ -126,6 +136,18 @@ function setText(selector, value) {
   if (element && value) element.textContent = value;
 }
 
+function setHref(selector, value) {
+  const url = safeUrl(value);
+  if (!url) return;
+  document.querySelectorAll(selector).forEach((link) => {
+    link.href = url;
+    if (url.startsWith("http")) {
+      link.target = "_blank";
+      link.rel = "noreferrer";
+    }
+  });
+}
+
 function applySettings(settings) {
   if (!settings) return;
 
@@ -140,6 +162,45 @@ function applySettings(settings) {
       heroImage.src = settings.heroImage.asset.url;
       heroImage.alt = settings.heroImage.alt || "";
     }
+  }
+
+  const contact = settings.contact || {};
+  const primaryEmail = contact.primaryEmail || settings.contactEmail;
+  if (contact.name) setText("[data-contact-name]", contact.name);
+  if (contact.phone) {
+    setText("[data-contact-phone]", contact.phone);
+    document.querySelectorAll("[data-contact-phone]").forEach((link) => {
+      link.href = phoneHref(contact.phone);
+    });
+  }
+  if (primaryEmail) {
+    document.querySelectorAll("a[data-contact-email]").forEach((link) => {
+      link.textContent = primaryEmail;
+      link.href = `mailto:${primaryEmail}`;
+    });
+    document.querySelectorAll("[data-contact-form]").forEach((form) => {
+      form.dataset.contactEmail = primaryEmail;
+    });
+  }
+  if (contact.backupEmail) {
+    document.querySelectorAll("a[data-contact-backup-email]").forEach((link) => {
+      link.textContent = contact.backupEmail;
+      link.href = `mailto:${contact.backupEmail}`;
+    });
+  }
+
+  const importantLinks = settings.importantLinks || {};
+  setHref("[data-calendar-link]", importantLinks.calendarUrl);
+  setHref("[data-group-signup-link]", importantLinks.groupSignupUrl);
+  setHref("[data-cinema-signup-link]", importantLinks.cinemaSignupUrl);
+
+  const association = settings.association || {};
+  if (association.bankgiro) setText("[data-association-bankgiro]", `Bankgiro ${association.bankgiro}`);
+  if (association.organizationNumber) {
+    setText(
+      "[data-association-meta]",
+      `Ange medlemskap eller st\u00f6dmedlemskap och namn som referens. Organisationsnummer: ${association.organizationNumber}.`,
+    );
   }
 
   const address = settings.address;
@@ -242,6 +303,8 @@ function updateFeaturedEvent(events) {
 
   document.querySelectorAll("[data-next-event-link]").forEach((link) => {
     link.setAttribute("href", nextEventPath);
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
     link.setAttribute("aria-label", `G\u00e5 till ${nextEvent.title} i evenemangslistan`);
   });
 

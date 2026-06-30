@@ -97,7 +97,7 @@
                 <div class="meta"><b>Plats</b><span>Askersundsv&auml;gen 32</span></div>
                 <div class="meta"><b>L&auml;nk</b><span>Kalender och anm&auml;lan</span></div>
               </div>
-              <a class="button primary" href="#/evenemang/nasta" data-next-event-link>Till kalendern</a>
+              <a class="button primary" href="#/evenemang/nasta" data-next-event-link data-calendar-link>Till kalendern</a>
             </article>
             <div class="poster-stack reveal">
               <img src="/mockup-assets/bioklubben-vt26.jpg" alt="Aktuell bioklubb och evenemangsinformation" />
@@ -136,7 +136,7 @@
                     <p>N&auml;r admin &auml;r fylld visas n&auml;sta evenemang automatiskt h&auml;r. Fram tills dess g&aring;r knappen till originalets kalender.</p>
                     <div class="chips"><span>Kalender</span><span>Biljetter</span><span>Anm&auml;lan</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/kalender-2/">Kalender</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/kalender-2/" data-calendar-link>Kalender</a>
                 </article>
 
                 <article class="event-card reveal" data-category="kurser barn">
@@ -149,7 +149,7 @@
                     <p>Dansdramalek, lilla teatergruppen, stora teatergruppen och vuxengrupp. Terminsavgift 750 kr.</p>
                     <div class="chips"><span>Aktuell termin</span><span>750 kr</span><span>Anm&auml;lan</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/">Anm&auml;l</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/" data-group-signup-link>Anm&auml;l</a>
                 </article>
 
                 <article class="event-card reveal" data-category="bio barn">
@@ -162,7 +162,7 @@
                     <p>Stor bioduk, bra ljud och mysiga biostolar. Pris enligt originalet: 200 kr per &aring;r eller 500 kr per familj.</p>
                     <div class="chips"><span>Filmklubb</span><span>200 kr / &aring;r</span><span>Familj 500 kr</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/">L&auml;s mer</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/" data-cinema-signup-link>L&auml;s mer</a>
                 </article>
               </div>
 
@@ -309,7 +309,7 @@
                     <p>N&auml;r admin &auml;r fylld visas n&auml;sta evenemang automatiskt h&auml;r. Fram tills dess g&aring;r knappen till originalets kalender.</p>
                     <div class="chips"><span>Kalender</span><span>Biljetter</span><span>Anm&auml;lan</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/kalender-2/">Kalender</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/kalender-2/" data-calendar-link>Kalender</a>
                 </article>
 
                 <article class="event-card reveal" data-category="kurser barn">
@@ -322,7 +322,7 @@
                     <p>Dansdramalek, lilla teatergruppen, stora teatergruppen och vuxengrupp. Terminsavgift 750 kr.</p>
                     <div class="chips"><span>Aktuell termin</span><span>750 kr</span><span>Anm&auml;lan</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/">Anm&auml;l</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/" data-group-signup-link>Anm&auml;l</a>
                 </article>
 
                 <article class="event-card reveal" data-category="bio barn">
@@ -335,7 +335,7 @@
                     <p>Stor bioduk, bra ljud och mysiga biostolar. Pris enligt originalet: 200 kr per &aring;r eller 500 kr per familj.</p>
                     <div class="chips"><span>Filmklubb</span><span>200 kr / &aring;r</span><span>Familj 500 kr</span></div>
                   </div>
-                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/">L&auml;s mer</a>
+                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/" data-cinema-signup-link>L&auml;s mer</a>
                 </article>
 
                 <article class="event-card reveal" data-category="biljetter kurser">
@@ -711,8 +711,8 @@
             </div>
             <div class="association-card glass-card reveal">
               <span>F&ouml;reningsinfo</span>
-              <strong>Bankgiro 5520-4424</strong>
-              <p>Ange medlemskap eller st&ouml;dmedlemskap och namn som referens. Organisationsnummer: 802490-0089.</p>
+              <strong data-association-bankgiro>Bankgiro 5520-4424</strong>
+              <p data-association-meta>Ange medlemskap eller st&ouml;dmedlemskap och namn som referens. Organisationsnummer: 802490-0089.</p>
               <div class="mini-list">
                 <span>Emma Ols&eacute;n, ordf&ouml;rande</span>
                 <span>Ulf Ols&eacute;n, kass&ouml;r</span>
@@ -810,12 +810,12 @@
               </article>
               <article class="info-card contact-card">
                 <p class="micro">Kontakt</p>
-                <h3>Emma Ols&eacute;n</h3>
+                <h3 data-contact-name>Emma Ols&eacute;n</h3>
                 <p>Fr&aring;gor om lokal, evenemang, samarbeten eller anm&auml;lan.</p>
                 <div class="contact-links">
-                  <a href="tel:+46704965053">070-496 50 53</a>
-                  <a href="mailto:emma@magiskateatern.se">emma@magiskateatern.se</a>
-                  <a href="mailto:magiskateatern.se@gmail.com">Reservmail</a>
+                  <a href="tel:+46704965053" data-contact-phone>070-496 50 53</a>
+                  <a href="mailto:emma@magiskateatern.se" data-contact-email>emma@magiskateatern.se</a>
+                  <a href="mailto:magiskateatern.se@gmail.com" data-contact-backup-email>Reservmail</a>
                 </div>
               </article>
             </div>

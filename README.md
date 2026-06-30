@@ -38,3 +38,5 @@ Se `studio/README.md` for installation och deploy av admin.
 Se `docs/PUBLISHING_READINESS.md` for aktuell lanseringschecklista, gamla URL:er som mappas om, och allt som fortfarande behover agaren/betalning/kontaktmetoder innan sidan ersatter originalet.
 
 Se ocksa `docs/CONTENT_INVENTORY.md` for en mer detaljerad mappning av originalets sidor, inlagg och vad som har slagits ihop.
+
+Se `docs/OWNER_HANDOFF.md` for kontoagarskap, Sanity/GitHub-overlamning, domanbeslut och rollback-plan.

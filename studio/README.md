@@ -27,14 +27,15 @@ npm run dev
 npm run deploy
 ```
 
-Sanity hanterar login, roller och bildhantering. Ge agaren rollen `Editor` eller en begransad roll, inte nodvandigtvis full admin.
+Sanity hanterar login, roller och bildhantering. Lat helst agaren aga Sanity-organisationen/projektet och bjud in utvecklaren som collaborator. Pa Sanity Free kan rollutbudet vara begransat; mer finmaskiga roller kan krava uppgradering.
 
 ## Sakerhet
 
 - Lagg aldrig Sanity write-token i frontend.
 - Den publika hemsidan ska bara anvanda `VITE_SANITY_PROJECT_ID` och `VITE_SANITY_DATASET`.
 - Hall datasetet publikt for publicerat innehall, eller bygg senare en server/proxy om innehall maste vara privat.
-- Ge agaren `Editor`-roll. Ge bara utvecklare full administrator.
+- Ge agaren en roll som kan uppdatera innehall. Ge bara utvecklare full administrator om det verkligen behovs.
+- Lagg aldrig privata nycklar, API tokens eller bankuppgifter i Sanity-falt som visas publikt.
 - Aktivera CORS origins i Sanity Manage:
   - `http://127.0.0.1:5173`
   - `https://benjaminsvensson.github.io`
@@ -62,3 +63,17 @@ Inga tokens ska laggas i frontend. Den publika sidan laser bara publicerat inneh
 ## Event som forsvinner automatiskt
 
 Frontend visar bara event dar `endDateTime` eller `startDateTime` ligger i framtiden. Ett event behover alltsa inte raderas manuellt: nar datumet passerat slutar det visas publikt men finns kvar i admin som historik.
+
+## Grundinstallningar som agaren bor fylla i
+
+I dokumentet `Grundinstallningar` kan agaren uppdatera:
+
+- hero-rubrik, tagline och startsidetext
+- hero-bild
+- adress
+- kontaktperson, telefon, primar e-post och reservmail
+- kalenderlank, teatergruppsanmalan och bioklubben-lank
+- bankgiro, organisationsnummer och medlemsavgifter
+- SEO-beskrivning
+
+Se aven `../docs/OWNER_HANDOFF.md` och `../docs/PUBLISHING_READINESS.md` innan skarp lansering.

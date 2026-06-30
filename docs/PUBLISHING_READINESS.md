@@ -6,6 +6,8 @@ Det här dokumentet är en ärlig lanseringslista för nya sidan. Målet är att
 
 För mer detaljerad mappning av gamla sidor och inlägg, se `docs/CONTENT_INVENTORY.md`.
 
+För kontoägarskap, domänflytt och praktisk överlämning till ägaren, se `docs/OWNER_HANDOFF.md`.
+
 ## Nuvarande status
 
 Sidan är en statisk Vite/Three.js-sajt hostad via GitHub Pages. Den har hash-routes för:
@@ -18,6 +20,8 @@ Sidan är en statisk Vite/Three.js-sajt hostad via GitHub Pages. Den har hash-ro
 - `#/hitta`
 
 Admin är scaffoldad i Sanity Studio under `studio/`. Publika sidan kan läsa publicerat Sanity-innehåll och sorterar bort passerade evenemang automatiskt när `startDateTime` eller `endDateTime` har passerat.
+
+`Grundinställningar` i Sanity har nu fält för hero, adress, kontaktperson, telefon, primär e-post, reservmail, kalenderlänk, teatergruppsanmälan, bioklubben-länk, bankgiro, organisationsnummer och medlemsavgifter.
 
 ## Innehåll som är inflyttat eller omorganiserat
 
@@ -60,7 +64,7 @@ Flera gamla småsidor är nu samlade i färre tydliga destinationer:
 
 - Sanity Studio finns i repo:t men måste deployas och ägas av rätt person/organisation.
 - Ägaren bör vara ägare eller admin i Sanity-projektet innan sidan blir skarp.
-- Lägg in roller så ägaren kan skapa/uppdatera event och grundtexter utan att ha onödigt bred adminåtkomst.
+- Lägg in roller så ägaren kan skapa/uppdatera event och grundtexter. På Sanity Free kan rollutbudet vara begränsat; mer finmaskiga roller kan kräva uppgradering.
 - GitHub Pages måste få repo variables:
   - `VITE_SANITY_PROJECT_ID`
   - `VITE_SANITY_DATASET`
