@@ -1477,9 +1477,10 @@ select {
 .history-gallery {
   display: grid;
   grid-template-columns: 1.25fr 0.95fr 0.8fr;
-  grid-auto-rows: minmax(190px, 255px);
+  grid-auto-rows: minmax(205px, auto);
   gap: 18px;
   align-items: stretch;
+  margin-top: clamp(54px, 7vw, 104px);
 }
 
 .history-lead,
@@ -1496,8 +1497,17 @@ select {
 
 .history-lead {
   display: grid;
-  align-content: center;
+  align-content: start;
   padding: clamp(24px, 4vw, 44px);
+}
+
+.history-lead h2 {
+  max-width: 640px;
+  font-size: clamp(2.25rem, 3.9vw, 4.45rem);
+}
+
+.history-lead p {
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
 }
 
 .history-photo {
