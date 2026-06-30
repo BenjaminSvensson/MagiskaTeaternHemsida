@@ -1,5 +1,9 @@
 import * as THREE from "three";
 
+const theaterExteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
+const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
+const propsUrl = new URL("../mockup-assets/rekvisita.jpg", import.meta.url).href;
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector(".menu-toggle");
@@ -210,9 +214,9 @@ async function setupHeroScene() {
   const group = new THREE.Group();
   scene.add(group);
 
-  const mainTexture = await createRoundedTexture("/mockup-assets/teaterniregn.jpg", 1200, 820);
-  const roomTexture = await createRoundedTexture("/mockup-assets/lokalen-fran-scenen.jpg", 760, 520);
-  const propTexture = await createRoundedTexture("/mockup-assets/rekvisita.jpg", 760, 520);
+  const mainTexture = await createRoundedTexture(theaterExteriorUrl, 1200, 820);
+  const roomTexture = await createRoundedTexture(theaterRoomUrl, 760, 520);
+  const propTexture = await createRoundedTexture(propsUrl, 760, 520);
 
   const main = new THREE.Mesh(
     new THREE.PlaneGeometry(6.6, 4.5, 16, 16),
