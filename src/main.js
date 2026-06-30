@@ -3,6 +3,23 @@ import {setupCmsContent} from "./cms.js";
 
 const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
 const propsUrl = new URL("../mockup-assets/rekvisita.jpg", import.meta.url).href;
+const birthdayUrl = new URL("../mockup-assets/kalas.jpg", import.meta.url).href;
+const eventPosterUrl = new URL("../mockup-assets/event-affisch.png", import.meta.url).href;
+const exteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
+const historyHotelUrl = new URL("../mockup-assets/historik-hotellet.jpg", import.meta.url).href;
+const historyFireUrl = new URL("../mockup-assets/historik-brand.jpg", import.meta.url).href;
+const historyHacknerUrl = new URL("../mockup-assets/historik-hackner.jpg", import.meta.url).href;
+
+const heroFloatingImageUrls = [
+  theaterRoomUrl,
+  propsUrl,
+  birthdayUrl,
+  eventPosterUrl,
+  exteriorUrl,
+  historyHotelUrl,
+  historyFireUrl,
+  historyHacknerUrl,
+];
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const header = document.querySelector("[data-header]");
@@ -279,12 +296,29 @@ async function setupHeroScene() {
   const group = new THREE.Group();
   scene.add(group);
 
-  const roomTexture = await createRoundedTexture(theaterRoomUrl, 760, 520);
-  const propTexture = await createRoundedTexture(propsUrl, 760, 520);
+  const floatingTextureResults = await Promise.allSettled(
+    heroFloatingImageUrls.map((url) => createRoundedTexture(url, 760, 520)),
+  );
+  const floatingTextures = floatingTextureResults
+    .filter((result) => result.status === "fulfilled")
+    .map((result) => result.value);
+
+  if (floatingTextures.length < 2) return;
+
+  const roomMaterial = new THREE.MeshBasicMaterial({
+    map: floatingTextures[0],
+    transparent: true,
+    opacity: 1,
+  });
+  const propsMaterial = new THREE.MeshBasicMaterial({
+    map: floatingTextures[1],
+    transparent: true,
+    opacity: 1,
+  });
 
   const room = new THREE.Mesh(
     new THREE.PlaneGeometry(2.05, 1.42),
-    new THREE.MeshBasicMaterial({ map: roomTexture, transparent: true }),
+    roomMaterial,
   );
   room.position.set(-2.18, -1.55, 0.72);
   room.rotation.z = -0.045;
@@ -292,7 +326,7 @@ async function setupHeroScene() {
 
   const props = new THREE.Mesh(
     new THREE.PlaneGeometry(1.62, 1.12),
-    new THREE.MeshBasicMaterial({ map: propTexture, transparent: true }),
+    propsMaterial,
   );
   props.position.set(2.42, 1.22, 0.86);
   props.rotation.z = 0.075;
@@ -356,6 +390,42 @@ async function setupHeroScene() {
   resize();
   window.addEventListener("resize", resize);
 
+  const floatingPanels = [
+    {
+      mesh: room,
+      material: roomMaterial,
+      baseY: -1.55,
+      textureIndex: 0,
+      interval: 5.8,
+      nextSwitch: 4.2,
+      cycleStep: 2,
+    },
+    {
+      mesh: props,
+      material: propsMaterial,
+      baseY: 1.22,
+      textureIndex: 1,
+      interval: 6.4,
+      nextSwitch: 6.1,
+      cycleStep: 2,
+    },
+  ];
+
+  const updateFloatingPanel = (panel, time) => {
+    if (time >= panel.nextSwitch) {
+      panel.textureIndex = (panel.textureIndex + panel.cycleStep) % floatingTextures.length;
+      panel.material.map = floatingTextures[panel.textureIndex];
+      panel.material.needsUpdate = true;
+      panel.nextSwitch = time + panel.interval;
+    }
+
+    const timeUntilSwitch = panel.nextSwitch - time;
+    const timeSinceSwitch = panel.interval - timeUntilSwitch;
+    const fadeIn = Math.min(1, timeSinceSwitch / 0.55);
+    const fadeOut = Math.min(1, timeUntilSwitch / 0.55);
+    panel.material.opacity = Math.max(0, Math.min(fadeIn, fadeOut));
+  };
+
   const clock = new THREE.Clock();
   const render = () => {
     const time = clock.getElapsedTime();
@@ -364,6 +434,7 @@ async function setupHeroScene() {
 
     room.position.y = -1.55 + Math.sin(time * 0.9) * 0.035;
     props.position.y = 1.22 + Math.cos(time * 0.75) * 0.04;
+    floatingPanels.forEach((panel) => updateFloatingPanel(panel, time));
     purpleGlow.rotation.x += 0.004;
     purpleGlow.rotation.z -= 0.003;
     sparkles.rotation.z = Math.sin(time * 0.18) * 0.04;
