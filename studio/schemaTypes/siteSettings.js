@@ -28,7 +28,7 @@ export const siteSettings = defineType({
       name: "heroTitle",
       title: "Startsiderubrik",
       type: "string",
-      initialValue: "En plats for scen, saga och skratt.",
+      initialValue: "MagiskaTeatern",
     }),
     defineField({
       name: "heroText",
