@@ -38,6 +38,59 @@ function setupHeader() {
   });
 }
 
+function setupRouter() {
+  const pages = [...document.querySelectorAll("[data-page]")];
+  const routeLinks = [...document.querySelectorAll("[data-route-link]")];
+  const routeTitles = {
+    hem: "Magiska Teatern | D\u00e4r dr\u00f6mmar blir v\u00e4rklighet",
+    evenemang: "Evenemang & kurser | Magiska Teatern",
+    huset: "Huset | Magiska Teatern",
+    hyra: "Hyr & event | Magiska Teatern",
+    engagera: "Engagera dig | Magiska Teatern",
+    hitta: "Hitta hit | Magiska Teatern",
+  };
+
+  const normalizeRoute = () => {
+    const raw = window.location.hash.replace(/^#\/?/, "");
+    if (raw === "kontakt" || raw === "grupper" || raw === "evenemang") return "evenemang";
+    if (raw === "hyr") return "hyra";
+    if (!raw) return "hem";
+    return pages.some((page) => page.dataset.page === raw) ? raw : "hem";
+  };
+
+  const renderRoute = () => {
+    const raw = window.location.hash.replace(/^#\/?/, "");
+    const targetId = raw === "kontakt" ? "kontakt" : null;
+    const route = normalizeRoute();
+    pages.forEach((page) => {
+      const isActive = page.dataset.page === route;
+      page.classList.toggle("is-active", isActive);
+      page.toggleAttribute("hidden", !isActive);
+    });
+    routeLinks.forEach((link) => {
+      const isActive = link.dataset.routeLink === route;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+    document.title = routeTitles[route] || routeTitles.hem;
+    requestAnimationFrame(() => {
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  };
+
+  window.addEventListener("hashchange", renderRoute);
+  renderRoute();
+}
+
 function setupReveals() {
   const revealItems = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
@@ -124,7 +177,7 @@ function setupFilters() {
 function setupFormsAndActions() {
   document.querySelectorAll("button.event-action").forEach((button) => {
     button.addEventListener("click", () => {
-      showToast(`${button.dataset.action}: kopplas till det riktiga flödet i nästa steg.`);
+      showToast(`${button.dataset.action}: kopplas till det riktiga fl\u00f6det i n\u00e4sta steg.`);
     });
   });
 
@@ -134,8 +187,8 @@ function setupFormsAndActions() {
     const status = form.querySelector(".form-status");
     const data = new FormData(form);
     const type = data.get("type");
-    status.textContent = `Tack! Förfrågan om ${String(type).toLowerCase()} är redo att skickas vidare.`;
-    showToast("Förfrågan sparad i prototypen.");
+    status.textContent = `Tack! F\u00f6rfr\u00e5gan om ${String(type).toLowerCase()} \u00e4r redo att skickas vidare.`;
+    showToast("F\u00f6rfr\u00e5gan sparad i prototypen.");
     form.reset();
   });
 }
@@ -327,6 +380,8 @@ setupTiltCards();
 setupParallaxFrames();
 setupFilters();
 setupFormsAndActions();
-setupHeroScene().catch(() => {
-  document.querySelector(".hero-stage")?.classList.add("is-fallback");
-});
+setupHeroScene()
+  .catch(() => {
+    document.querySelector(".hero-stage")?.classList.add("is-fallback");
+  })
+  .finally(setupRouter);

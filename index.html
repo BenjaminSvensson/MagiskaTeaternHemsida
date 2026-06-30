@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Magiska Teatern i Vretstorp: teater, bio, barnkalas, event, lokalhyra och sceniska upplevelser."
+      content="Magiska Teatern i Vretstorp: teater, bio, barnkalas, event, lokalhyra, kostym, rekvisita och sceniska upplevelser."
     />
-    <title>Magiska Teatern | Där drömmar blir värklighet</title>
+    <title>Magiska Teatern | D&auml;r dr&ouml;mmar blir v&auml;rklighet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,236 +17,453 @@
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Hoppa till innehåll</a>
+    <a class="skip-link" href="#main">Hoppa till inneh&aring;ll</a>
 
     <div class="site-shell">
       <header class="site-header" data-header>
         <div class="notice-bar">Teater, bio, barnkalas och magiska event i Vretstorp</div>
         <nav class="nav" aria-label="Huvudmeny">
-          <a class="brand" href="#top" aria-label="Magiska Teatern startsida">
+          <a class="brand" href="#/hem" data-route-link="hem" aria-label="Magiska Teatern startsida">
             <img src="/mockup-assets/logga-transparent.png" alt="Magiska Teatern" />
           </a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
             <span></span>
             <span></span>
             <span></span>
-            <span class="sr-only">Öppna meny</span>
+            <span class="sr-only">&Ouml;ppna meny</span>
           </button>
           <div class="nav-menu" id="nav-menu">
-            <a href="#om">Om huset</a>
-            <a href="#evenemang">Evenemang</a>
-            <a href="#grupper">Teatergrupper</a>
-            <a href="#hyr">Hyr teatern</a>
-            <a href="#kontakt">Kontakt</a>
-            <a class="button primary small" href="https://www.magiskateatern.se/evenemang/kommande-evenemang/">Köp biljett</a>
+            <a href="#/hem" data-route-link="hem">Start</a>
+            <a href="#/evenemang" data-route-link="evenemang">Evenemang</a>
+            <a href="#/huset" data-route-link="huset">Huset</a>
+            <a href="#/hyra" data-route-link="hyra">Hyr & event</a>
+            <a href="#/engagera" data-route-link="engagera">Engagera</a>
+            <a href="#/hitta" data-route-link="hitta">Hitta hit</a>
+            <a class="button primary small" href="#/evenemang" data-route-link="evenemang">K&ouml;p biljett</a>
           </div>
         </nav>
       </header>
 
       <main id="main">
-        <section class="hero section" id="top" aria-labelledby="hero-title">
-          <div class="ambient-layer" aria-hidden="true"></div>
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Där drömmar blir värklighet</p>
-            <h1 id="hero-title">En plats för scen, saga och skratt.</h1>
-            <p class="hero-lede">
-              Magiska Teatern samlar föreställningar, bioklubb, teatergrupper, barnkalas och
-              egna event i ett historiskt hus med väldigt mycket personlighet.
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#evenemang">Se evenemang</a>
-              <a class="button secondary" href="#hyr">Hyr lokalen</a>
+        <section class="view is-active" data-page="hem">
+          <section class="hero section" id="top" aria-labelledby="hero-title">
+            <div class="ambient-layer" aria-hidden="true"></div>
+            <div class="hero-stage" data-tilt-card aria-label="Magiska Teatern i Vretstorp">
+              <canvas id="hero-canvas"></canvas>
+              <img class="hero-fallback" src="/mockup-assets/teaterniregn.jpg" alt="" />
+              <div class="hero-photo-fade" aria-hidden="true"></div>
+              <div class="stage-label glass-card">
+                <span>N&auml;sta p&aring; scen</span>
+                <strong>Teaterkonsert 22 mars kl 14:00</strong>
+              </div>
+              <div class="stage-chip">
+                <span>150 platser</span>
+                <span>Scen & bar</span>
+              </div>
             </div>
-          </div>
+            <div class="hero-copy reveal">
+              <p class="eyebrow">D&auml;r dr&ouml;mmar blir v&auml;rklighet</p>
+              <h1 id="hero-title">En plats f&ouml;r scen, saga och skratt.</h1>
+              <p class="hero-lede">
+                Norra Europas enda Magiska Teater, mitt i Vretstorp. H&auml;r ryms teatergrupper,
+                bioklubb, f&ouml;rest&auml;llningar, barnkalas, lokalhyra, kostym, rekvisita och egna event.
+              </p>
+              <div class="hero-actions">
+                <a class="button primary" href="#/evenemang" data-route-link="evenemang">Se evenemang</a>
+                <a class="button secondary" href="#/hyra" data-route-link="hyra">Hyr lokalen</a>
+              </div>
+            </div>
+          </section>
 
-          <div class="hero-stage reveal" data-tilt-card aria-label="Magiska Teatern i Vretstorp">
-            <canvas id="hero-canvas"></canvas>
-            <img class="hero-fallback" src="/mockup-assets/teaterniregn.jpg" alt="" />
-            <div class="stage-label glass-card">
-              <span>Nästa på scen</span>
-              <strong>Teaterkonsert 22 mars kl 14:00</strong>
+          <section class="quick-paths section" aria-labelledby="paths-title">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Snabba v&auml;gar</p>
+              <h2 id="paths-title">Vad vill du g&ouml;ra?</h2>
             </div>
-            <div class="stage-chip">
-              <span>150 platser</span>
-              <span>Scen & bar</span>
+            <div class="path-grid">
+              <a class="path-card reveal" href="#/evenemang" data-route-link="evenemang" data-tilt-card>
+                <span>Spela</span>
+                <strong>Teatergrupper</strong>
+                <p>Dansdramalek, lilla teatergruppen, stora teatergruppen och vuxengrupp.</p>
+              </a>
+              <a class="path-card reveal" href="#/evenemang" data-route-link="evenemang" data-tilt-card>
+                <span>Se</span>
+                <strong>Bio & scen</strong>
+                <p>Bioklubb, teaterkonserter, f&ouml;rest&auml;llningar och kalender.</p>
+              </a>
+              <a class="path-card reveal" href="#/hyra" data-route-link="hyra" data-tilt-card>
+                <span>Samlas</span>
+                <strong>Hyr teatern</strong>
+                <p>Fest, f&ouml;rel&auml;sning, m&auml;ssa, filmvisning, show eller en egen kv&auml;ll.</p>
+              </a>
+              <a class="path-card reveal" href="#/engagera" data-route-link="engagera" data-tilt-card>
+                <span>St&ouml;d</span>
+                <strong>Medlem & sponsor</strong>
+                <p>Bli medlem, volont&auml;r, st&ouml;dmedlem eller samarbetspartner.</p>
+              </a>
             </div>
-          </div>
+          </section>
+
+          <section class="home-feature section">
+            <article class="feature-panel reveal">
+              <p class="eyebrow">Kommande evenemang</p>
+              <h2>Biljetter, anm&auml;lan och f&ouml;rfr&aring;gan utan att beh&ouml;va leta.</h2>
+              <p>
+                Startsidan samlar de viktigaste v&auml;garna f&ouml;rst: k&ouml;p biljett till n&auml;sta evenemang,
+                anm&auml;l teatergrupp eller bioklubb, hyr lokalen och hitta kontaktv&auml;gen.
+              </p>
+              <div class="meta-row">
+                <div class="meta"><b>Tid</b><span>S&ouml;ndag 22 mars, 14:00</span></div>
+                <div class="meta"><b>Plats</b><span>Askersundsv&auml;gen 32</span></div>
+                <div class="meta"><b>Pris</b><span>250 kr / 100 kr medlem</span></div>
+              </div>
+              <a class="button primary" href="#/evenemang" data-route-link="evenemang">Till evenemang</a>
+            </article>
+            <div class="poster-stack reveal">
+              <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
+            </div>
+          </section>
         </section>
 
-        <section class="quick-paths section" aria-labelledby="paths-title">
-          <div class="section-heading reveal">
-            <p class="eyebrow">Snabba vägar</p>
-            <h2 id="paths-title">Vad vill du göra?</h2>
-          </div>
-          <div class="path-grid">
-            <a class="path-card reveal" href="#grupper" data-tilt-card>
-              <span>Spela</span>
-              <strong>Teatergrupper</strong>
-              <p>Dansdrama, barnteater, stora gruppen och vuxengrupp.</p>
-            </a>
-            <a class="path-card reveal" href="#evenemang" data-tilt-card>
-              <span>Se</span>
-              <strong>Bioklubben</strong>
-              <p>Filmvisningar och föreställningar i Vretstorps gamla biograf.</p>
-            </a>
-            <a class="path-card reveal" href="#hyr" data-tilt-card>
-              <span>Samlas</span>
-              <strong>Hyr lokalen</strong>
-              <p>Fest, konferens, filmvisning, föreställning eller show.</p>
-            </a>
-            <a class="path-card reveal" href="#kontakt" data-tilt-card>
-              <span>Skapa</span>
-              <strong>Egna event</strong>
-              <p>Barnkalas, magishow, smink, kostym och temaäventyr.</p>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-section section" id="om" aria-labelledby="house-title">
-          <div class="portal-copy reveal">
-            <p class="eyebrow">Huset</p>
-            <h2 id="house-title">En gammal biograf med nya berättelser.</h2>
-            <p>
-              Magiska Teatern behöver kännas varm först och praktisk direkt därefter. Därför får
-              bilderna bära mycket av platskänslan medan kort, knappar och formulär leder vidare
-              utan krångel.
-            </p>
-          </div>
-          <div class="portal-window reveal" data-parallax-frame>
-            <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen sedd från scenen" />
-          </div>
-        </section>
-
-        <section class="events section" id="evenemang" aria-labelledby="events-title">
-          <div class="events-head reveal">
+        <section class="view" data-page="evenemang">
+          <section class="page-hero section soft-hero">
             <div>
               <p class="eyebrow">Evenemang och kurser</p>
-              <h2 id="events-title">Hitta nästa kväll, kurs eller äventyr i huset.</h2>
+              <h1>Hitta n&auml;sta kv&auml;ll, kurs eller &auml;ventyr i huset.</h1>
+              <p>
+                H&auml;r samlas kommande evenemang, bioklubben, teatergrupperna och kalendern s&aring; bes&ouml;karen
+                slipper leta runt bland m&aring;nga sm&aring; sidor.
+              </p>
             </div>
-            <p>
-              Filtrera snabbt mellan biljetter, grupper och hyrbart. Kortens knappar kan senare
-              kopplas mot befintliga boknings- och kontaktflöden.
-            </p>
-          </div>
+            <div class="hero-mini-image" data-parallax-frame>
+              <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen sedd fr&aring;n scenen" />
+            </div>
+          </section>
 
-          <div class="filter-row reveal" role="tablist" aria-label="Filtrera evenemang">
-            <button class="filter active" type="button" data-filter="alla">Alla</button>
-            <button class="filter" type="button" data-filter="biljetter">Biljetter</button>
-            <button class="filter" type="button" data-filter="kurser">Kurser</button>
-            <button class="filter" type="button" data-filter="barn">Barn</button>
-            <button class="filter" type="button" data-filter="hyrbart">Hyrbart</button>
-          </div>
-
-          <div class="event-layout">
-            <div class="event-list">
-              <article class="event-card reveal" data-category="biljetter">
-                <div class="event-image poster-frame" data-parallax-frame>
-                  <img src="/mockup-assets/event-affisch.png" alt="Affisch för Teaterkonsert: Kunde jag följa dig" />
-                </div>
-                <div class="event-body">
-                  <p class="micro">Nästa evenemang</p>
-                  <h3>Teaterkonsert: Kunde jag följa dig</h3>
-                  <p>En föreställning om Karin Boyes liv och dikter, med tonsatt poesi.</p>
-                  <div class="chips">
-                    <span>22 mars</span>
-                    <span>14:00</span>
-                    <span>Biljetter</span>
-                  </div>
-                </div>
-                <a class="button primary event-action" href="https://www.magiskateatern.se/evenemang/kommande-evenemang/">
-                  Köp
-                </a>
-              </article>
-
-              <article class="event-card reveal" data-category="kurser barn">
-                <div class="event-image" data-parallax-frame>
-                  <img src="/mockup-assets/kalas.jpg" alt="Barnkalas och teaterlek på Magiska Teatern" />
-                </div>
-                <div class="event-body">
-                  <p class="micro">VT 2026</p>
-                  <h3>Teatergrupper för barn</h3>
-                  <p>Dansdrama, lilla och stora teatergruppen med lek, fantasi och scenmod.</p>
-                  <div class="chips">
-                    <span>VT 2026</span>
-                    <span>750 kr</span>
-                    <span>Anmälan</span>
-                  </div>
-                </div>
-                <a class="button primary event-action" href="https://www.magiskateatern.se/teatergrupp/">
-                  Anmäl
-                </a>
-              </article>
-
-              <article class="event-card reveal" data-category="hyrbart">
-                <div class="event-image" data-parallax-frame>
-                  <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen uppdukad för event" />
-                </div>
-                <div class="event-body">
-                  <p class="micro">Hyr teatern</p>
-                  <h3>Hyr teatern för ditt event</h3>
-                  <p>Fest, konferens, filmvisning, föreställning eller en helt egen magisk kväll.</p>
-                  <div class="chips">
-                    <span>150 platser</span>
-                    <span>Bar</span>
-                    <span>Scen</span>
-                  </div>
-                </div>
-                <a class="button primary event-action" href="https://www.magiskateatern.se/hyr-teaterlokal/">
-                  Fråga
-                </a>
-              </article>
+          <section class="events section" aria-labelledby="events-title">
+            <div class="events-head reveal">
+              <div>
+                <p class="eyebrow">Aktuellt</p>
+                <h2 id="events-title">Boka, anm&auml;l eller l&auml;gg i kalendern.</h2>
+              </div>
+              <p>
+                Evenemangskorten l&auml;nkar vidare till originalets biljett- och anm&auml;lningssidor. Den h&auml;r
+                sidan kan senare kopplas till ett gemensamt bokningsfl&ouml;de.
+              </p>
             </div>
 
-            <aside class="booking-panel reveal" id="kontakt">
-              <p class="eyebrow">Snabb kontakt</p>
-              <h3>Vad vill du göra?</h3>
-              <form class="contact-form" data-contact-form>
-                <label>
-                  Ärende
-                  <select name="type">
-                    <option>Biljetter</option>
-                    <option>Teatergrupp</option>
-                    <option>Hyr lokalen</option>
-                    <option>Rekvisita och kostym</option>
-                  </select>
-                </label>
-                <label>
-                  Namn
-                  <input name="name" type="text" placeholder="Ditt namn" required />
-                </label>
-                <label>
-                  E-post
-                  <input name="email" type="email" placeholder="namn@example.com" required />
-                </label>
-                <button class="button primary" type="submit">Skicka förfrågan</button>
-                <p class="form-status" aria-live="polite"></p>
-              </form>
-            </aside>
-          </div>
+            <div class="filter-row reveal" role="tablist" aria-label="Filtrera evenemang">
+              <button class="filter active" type="button" data-filter="alla">Alla</button>
+              <button class="filter" type="button" data-filter="biljetter">Biljetter</button>
+              <button class="filter" type="button" data-filter="kurser">Kurser</button>
+              <button class="filter" type="button" data-filter="bio">Bio</button>
+              <button class="filter" type="button" data-filter="barn">Barn</button>
+            </div>
+
+            <div class="event-layout">
+              <div class="event-list">
+                <article class="event-card reveal" data-category="biljetter">
+                  <div class="event-image poster-frame" data-parallax-frame>
+                    <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">N&auml;sta evenemang</p>
+                    <h3>Teaterkonsert: Kunde jag f&ouml;lja dig</h3>
+                    <p>Teaterkonsert om Karin Boyes liv och dikter. Visas p&aring; teatern 22 mars kl 14:00.</p>
+                    <div class="chips"><span>22 mars</span><span>14:00</span><span>Biljetter</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/evenemang/kommande-evenemang/">K&ouml;p</a>
+                </article>
+
+                <article class="event-card reveal" data-category="kurser barn">
+                  <div class="event-image" data-parallax-frame>
+                    <img src="/mockup-assets/kalas.jpg" alt="Barnkalas och teaterlek p&aring; Magiska Teatern" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">V&aring;rterminen 2026</p>
+                    <h3>Teatergrupper p&aring; Magiska Teatern</h3>
+                    <p>Dansdramalek, lilla teatergruppen, stora teatergruppen och vuxengrupp. Terminsavgift 750 kr.</p>
+                    <div class="chips"><span>Start 19 jan</span><span>750 kr</span><span>Anm&auml;lan</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/">Anm&auml;l</a>
+                </article>
+
+                <article class="event-card reveal" data-category="bio barn">
+                  <div class="event-image" data-parallax-frame>
+                    <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Vretstorps gamla biograf" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">Bioklubben VT 2026</p>
+                    <h3>Bio i Vretstorps gamla biograf</h3>
+                    <p>Start 19 januari kl 15:30. Stor bioduk, bra ljud och mysiga biostolar. Pris 200 kr per &aring;r eller 500 kr per familj.</p>
+                    <div class="chips"><span>19 jan</span><span>15:30</span><span>Bio</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/">L&auml;s mer</a>
+                </article>
+
+                <article class="event-card reveal" data-category="biljetter kurser">
+                  <div class="event-image" data-parallax-frame>
+                    <img src="/mockup-assets/teaterniregn.jpg" alt="Magiska Teatern fr&aring;n utsidan" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">Kalender</p>
+                    <h3>Alla datum p&aring; ett st&auml;lle</h3>
+                    <p>Kalendern f&aring;r en tydlig plats h&auml;r n&auml;r fler f&ouml;rest&auml;llningar, kurser och hyrbara kv&auml;llar l&auml;ggs upp.</p>
+                    <div class="chips"><span>Kommande</span><span>Kurser</span><span>Scen</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/kalender-2/">Kalender</a>
+                </article>
+              </div>
+
+              <aside class="booking-panel reveal" id="kontakt">
+                <p class="eyebrow">Snabb kontakt</p>
+                <h3>Vad vill du g&ouml;ra?</h3>
+                <form class="contact-form" data-contact-form>
+                  <label>
+                    &Auml;rende
+                    <select name="type">
+                      <option>Biljetter</option>
+                      <option>Teatergrupp</option>
+                      <option>Bioklubben</option>
+                      <option>Hyr lokalen</option>
+                      <option>Rekvisita och kostym</option>
+                    </select>
+                  </label>
+                  <label>
+                    Namn
+                    <input name="name" type="text" placeholder="Ditt namn" required />
+                  </label>
+                  <label>
+                    E-post
+                    <input name="email" type="email" placeholder="namn@example.com" required />
+                  </label>
+                  <button class="button primary" type="submit">Skicka f&ouml;rfr&aring;gan</button>
+                  <p class="form-status" aria-live="polite"></p>
+                </form>
+              </aside>
+            </div>
+          </section>
+
+          <section class="detail-grid section">
+            <article class="info-card">
+              <p class="micro">Dansdramalek</p>
+              <h3>F&ouml;r barn 3-6 &aring;r</h3>
+              <p>M&aring;ndagar 17:30-18:15. R&ouml;relse till musik, sagor och dramatisering.</p>
+            </article>
+            <article class="info-card">
+              <p class="micro">Lilla teatergruppen</p>
+              <h3>F-klass till &aring;rskurs 3</h3>
+              <p>M&aring;ndagar 13:45-15:15. Teaterlek som st&auml;rker grupp, koncentration och sj&auml;lvf&ouml;rtroende.</p>
+            </article>
+            <article class="info-card">
+              <p class="micro">Stora teatergruppen</p>
+              <h3>&Aring;rskurs 3-6</h3>
+              <p>Onsdagar 14:45-16:15. Fantasi, kreativitet och f&ouml;rsta stegen mot egen f&ouml;rest&auml;llning.</p>
+            </article>
+            <article class="info-card">
+              <p class="micro">Vuxengrupp</p>
+              <h3>Fr&aring;n &aring;rskurs 6 och upp&aring;t</h3>
+              <p>Startas vid intresse. Roller, manusbearbetning och st&ouml;rre f&ouml;rest&auml;llning tillsammans.</p>
+            </article>
+          </section>
         </section>
 
-        <section class="rent section" id="hyr" aria-labelledby="rent-title">
-          <div class="portal-window tall reveal" data-parallax-frame>
-            <img src="/mockup-assets/rekvisita.jpg" alt="Kostym och rekvisita från teatern" />
-          </div>
-          <div class="rent-copy reveal">
-            <p class="eyebrow">Scen, kostym och idéer</p>
-            <h2 id="rent-title">Som ett litet hål in i huset.</h2>
-            <p>
-              De croppade bildfönstren rör sig långsamt när sidan scrollar, så det känns som att
-              bilderna ligger bakom sidan. Effekten är medvetet mjuk för att inte störa läsningen.
-            </p>
-            <div class="rent-cards" id="grupper">
-              <div class="mini-card">
-                <span>För barn</span>
-                <strong>Drama och fantasi</strong>
-              </div>
-              <div class="mini-card">
-                <span>För vuxna</span>
-                <strong>Scenmod och gemenskap</strong>
+        <section class="view" data-page="huset">
+          <section class="page-hero section">
+            <div>
+              <p class="eyebrow">Husets historia</p>
+              <h1>Ett gammalt biografhus med v&auml;ldigt m&aring;nga liv.</h1>
+              <p>
+                Fr&aring;n hotell och biografteater till bank, arrestcell, Bio-Johans biograf och dagens
+                Magiska Teater. Historien f&aring;r bli en egen sida ist&auml;llet f&ouml;r att g&ouml;mmas i en undermeny.
+              </p>
+            </div>
+            <div class="hero-mini-image" data-parallax-frame>
+              <img src="/mockup-assets/teaterniregn.jpg" alt="Magiska Teatern fr&aring;n utsidan" />
+            </div>
+          </section>
+
+          <section class="story-section section">
+            <div class="timeline-card reveal">
+              <span>1896</span>
+              <h3>Vretstorps hotell</h3>
+              <p>P&aring; platsen l&aring;g Eriksdalshotellet, ett trev&aring;nings tr&auml;hus som senare brann ner 1923.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>1925</span>
+              <h3>Vretstorps biografteater</h3>
+              <p>Byggdes upp igen p&aring; samma grund och fick sin teatersal och biografhistoria.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>1930-tal</span>
+              <h3>Bank, l&auml;nsman och arrestcell</h3>
+              <p>Huset har haft bankvalv, handelslokaler och en gallerf&ouml;rsedd arrestcell i k&auml;llaren.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>1970-90</span>
+              <h3>Bio-Johan och Skandia bio</h3>
+              <p>Film visades l&auml;nge i lokalen, som blev den sista av Stig Carlssons biografer i N&auml;rke.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>1990-tal</span>
+              <h3>Magin flyttar in</h3>
+              <p>Illusionister tog &ouml;ver, renoverade inv&auml;ndigt och gav huset namnet Magiska Teatern.</p>
+            </div>
+          </section>
+
+          <section class="portal-section section">
+            <div class="portal-copy reveal">
+              <p class="eyebrow">Scenkonstf&ouml;reningen</p>
+              <h2>En ideell f&ouml;rening som h&aring;ller huset levande.</h2>
+              <p>
+                Magiska Teaterns Scenkonstf&ouml;rening bildades 2014 f&ouml;r scenkonst och kulturaktiviteter.
+                Medlemskap ger rabatt p&aring; utvalda evenemang och st&ouml;djer verksamheten.
+              </p>
+              <div class="chips"><span>100 kr / &aring;r</span><span>250 kr familj</span><span>BG 5520-4424</span></div>
+            </div>
+            <div class="portal-window reveal" data-parallax-frame>
+              <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen" />
+            </div>
+          </section>
+        </section>
+
+        <section class="view" data-page="hyra">
+          <section class="page-hero section soft-hero">
+            <div>
+              <p class="eyebrow">Hyr & skapa</p>
+              <h1>Teaterlokal, event, kostym och rekvisita.</h1>
+              <p>
+                Samla allt hyrbart p&aring; ett st&auml;lle: scen, bar, salong, loger, k&ouml;k, kostymf&ouml;rr&aring;d,
+                rekvisita och f&auml;rdiga event som barnkalas eller Halloweenkv&auml;ll.
+              </p>
+            </div>
+            <div class="hero-mini-image" data-parallax-frame>
+              <img src="/mockup-assets/rekvisita.jpg" alt="Kostym och rekvisita" />
+            </div>
+          </section>
+
+          <section class="rent section">
+            <div class="portal-window tall reveal" data-parallax-frame>
+              <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen uppdukad f&ouml;r event" />
+            </div>
+            <div class="rent-copy reveal">
+              <p class="eyebrow">Hyr teaterlokal</p>
+              <h2>Scen, salong, bar och loger.</h2>
+              <p>
+                Lokalen &auml;r godk&auml;nd f&ouml;r 150 deltagare och kan m&ouml;bleras om f&ouml;r st&aring;ende eller sittande publik.
+                Scenen &auml;r cirka 5 meter bred och drygt 3 meter djup med rid&aring;. Det finns garderob, bar p&aring;
+                l&auml;ktaren, tv&aring; g&auml;sttoaletter och loger i k&auml;llaren med uppg&aring;ng direkt till scenen.
+              </p>
+              <div class="rent-cards">
+                <div class="mini-card"><span>Vardag dag</span><strong>1500 kr</strong></div>
+                <div class="mini-card"><span>Helg dag</span><strong>1800 kr</strong></div>
+                <div class="mini-card"><span>Vardag kv&auml;ll</span><strong>1500 kr</strong></div>
+                <div class="mini-card"><span>Fre/l&ouml;r kv&auml;ll</span><strong>1800 kr</strong></div>
               </div>
             </div>
-          </div>
+          </section>
+
+          <section class="detail-grid section">
+            <article class="info-card">
+              <p class="micro">Kostym & rekvisita</p>
+              <h3>Fr&aring;n Dramaten till specialbyggen</h3>
+              <p>Scenkostymer, maskerad, lajv, medeltid, j&auml;rn&aring;lder, skelett, drake, prinsessor, feer och superhj&auml;ltar.</p>
+            </article>
+            <article class="info-card">
+              <p class="micro">Barnkalas</p>
+              <h3>Skapa ett eget &auml;ventyr</h3>
+              <p>Hyr in hj&auml;lp med underh&aring;llning, tema, kostym och fantasi f&ouml;r ett mer minnesv&auml;rt kalas.</p>
+            </article>
+            <article class="info-card">
+              <p class="micro">Halloween</p>
+              <h3>Rysligt men familjev&auml;nligt</h3>
+              <p>Samla Halloween, smink, rekvisita, m&ouml;rka detaljer och f&auml;rdiga eventf&ouml;rfr&aring;gningar p&aring; samma sida.</p>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" data-page="engagera">
+          <section class="page-hero section">
+            <div>
+              <p class="eyebrow">Engagera dig</p>
+              <h1>Medlem, volont&auml;r, sponsor eller samarbetspartner.</h1>
+              <p>
+                Originalets sponsor- och f&ouml;reningssidor blir h&auml;r en tydligare v&auml;g in f&ouml;r m&auml;nniskor och
+                f&ouml;retag som vill hj&auml;lpa kulturen i Vretstorp att v&auml;xa.
+              </p>
+            </div>
+          </section>
+
+          <section class="detail-grid section sponsor-grid">
+            <article class="info-card large">
+              <p class="micro">Privatperson</p>
+              <h3>Bli medlem i scenkonstf&ouml;reningen</h3>
+              <p>Medlemskap kostar 100 kr per &aring;r, eller max 250 kr f&ouml;r familj p&aring; samma adress. Medlemmar f&aring;r rabatt p&aring; utvalda evenemang.</p>
+            </article>
+            <article class="info-card large">
+              <p class="micro">Volont&auml;r</p>
+              <h3>Hj&auml;lp till n&auml;r huset vaknar</h3>
+              <p>Anm&auml;l intresse s&aring; kan f&ouml;reningen h&ouml;ra av sig inf&ouml;r evenemang, f&ouml;rest&auml;llningar, kurser och praktiska kv&auml;llar.</p>
+            </article>
+            <article class="info-card large">
+              <p class="micro">F&ouml;retag</p>
+              <h3>St&ouml;dmedlem eller sponsor</h3>
+              <p>F&ouml;retag kan bli st&ouml;dmedlemmar f&ouml;r 250 kr per &aring;r eller sponsor med exponering p&aring; hemsida, tacktavla och i skyltf&ouml;nster.</p>
+            </article>
+          </section>
+
+          <section class="tier-section section">
+            <div class="tier-card"><span>Brons</span><strong>2 000 kr / &aring;r</strong><p>Tacktavla i entr&eacute;n och l&auml;nk fr&aring;n sponsorsidan.</p></div>
+            <div class="tier-card"><span>Silver</span><strong>5 000 kr / &aring;r</strong><p>Tacktavla, l&auml;nk och omn&auml;mnande vid olika evenemang.</p></div>
+            <div class="tier-card"><span>Guld</span><strong>10 000 kr / &aring;r</strong><p>Skyltf&ouml;nster, tacktavla, l&auml;nk och m&ouml;jlighet till mer synlighet.</p></div>
+            <div class="tier-card"><span>Platina</span><strong>20 000 kr / &aring;r</strong><p>St&ouml;rst exponering, hemsidel&auml;nk och m&ouml;jlighet till kundaktivitet.</p></div>
+          </section>
+        </section>
+
+        <section class="view" data-page="hitta">
+          <section class="page-hero section soft-hero">
+            <div>
+              <p class="eyebrow">Hitta hit</p>
+              <h1>Mitt i Vretstorp, n&auml;ra E20.</h1>
+              <p>
+                Magiska Teatern ligger mitt emellan Stockholm och G&ouml;teborg, n&auml;ra E20 och bussf&ouml;rbindelser.
+                Adressen f&ouml;r den h&auml;r prototypen &auml;r Askersundsv&auml;gen 32, 694 50 Vretstorp.
+              </p>
+            </div>
+            <div class="address-card glass-card">
+              <span>Adress</span>
+              <strong>Askersundsv&auml;gen 32</strong>
+              <p>694 50 Vretstorp</p>
+            </div>
+          </section>
+
+          <section class="map-section section">
+            <div class="map-frame">
+              <iframe
+                title="Google Maps: Askersundsv&auml;gen 32, Vretstorp"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Askersundsv%C3%A4gen%2032%2C%20Vretstorp&output=embed"
+              ></iframe>
+            </div>
+            <div class="directions-panel">
+              <article class="info-card">
+                <p class="micro">Parkering</p>
+                <h3>Avgiftsfritt i Vretstorp</h3>
+                <p>Det finns gott om avgiftsfria parkeringsplatser, bland annat p&aring; Stationsgatan och Parkgatan bakom teatern.</p>
+              </article>
+              <article class="info-card">
+                <p class="micro">Med bil</p>
+                <h3>Sv&auml;ng av E20 mot Vretstorp</h3>
+                <p>Forts&auml;tt mot centrum. Teatern ligger vid Askersundsv&auml;gen innan j&auml;rnv&auml;gs&ouml;verg&aring;ngen fr&aring;n E20-h&aring;llet.</p>
+              </article>
+              <article class="info-card">
+                <p class="micro">Kollektivtrafik</p>
+                <h3>Buss 705 eller 754</h3>
+                <p>Fr&aring;n Hallsberg, &Ouml;rebro eller Lax&aring;: buss 705 till Stationsgatan. Fr&aring;n Askersund: buss 754 till Stationsgatan.</p>
+              </article>
+            </div>
+          </section>
         </section>
       </main>
     </div>
