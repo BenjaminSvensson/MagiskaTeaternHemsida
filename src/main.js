@@ -2,23 +2,19 @@ import * as THREE from "three";
 import {setupCmsContent} from "./cms.js";
 
 const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
-const propsUrl = new URL("../mockup-assets/rekvisita.jpg", import.meta.url).href;
-const birthdayUrl = new URL("../mockup-assets/kalas.jpg", import.meta.url).href;
-const eventPosterUrl = new URL("../mockup-assets/event-affisch.png", import.meta.url).href;
 const exteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
 const historyHotelUrl = new URL("../mockup-assets/historik-hotellet.jpg", import.meta.url).href;
 const historyFireUrl = new URL("../mockup-assets/historik-brand.jpg", import.meta.url).href;
-const historyHacknerUrl = new URL("../mockup-assets/historik-hackner.jpg", import.meta.url).href;
+const historyCinemaUrl = new URL("../mockup-assets/historik-biografen.jpg", import.meta.url).href;
+const historyRenovationUrl = new URL("../mockup-assets/historik-renovering.jpg", import.meta.url).href;
 
 const heroFloatingImageUrls = [
-  theaterRoomUrl,
-  propsUrl,
-  birthdayUrl,
-  eventPosterUrl,
   exteriorUrl,
+  theaterRoomUrl,
   historyHotelUrl,
   historyFireUrl,
-  historyHacknerUrl,
+  historyCinemaUrl,
+  historyRenovationUrl,
 ];
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
