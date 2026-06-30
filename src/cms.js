@@ -144,20 +144,26 @@ function applySettings(settings) {
 
   const address = settings.address;
   if (address?.street) {
+    const addressLine = [address.postalCode, address.city].filter(Boolean).join(" ");
     setText(".address-card strong", address.street);
-    setText(".address-card p", [address.postalCode, address.city].filter(Boolean).join(" "));
+    setText(".address-card p", addressLine);
+    setText(".location-card strong", address.street);
+    setText(".location-card p", addressLine);
     document.querySelectorAll(".meta").forEach((meta) => {
       if (meta.querySelector("b")?.textContent?.toLowerCase() === "plats") {
         meta.querySelector("span").textContent = address.street;
       }
     });
 
-    const mapFrame = document.querySelector(".map-frame iframe");
-    if (mapFrame) {
-      const mapAddress = [address.street, address.postalCode, address.city].filter(Boolean).join(", ");
+    const mapAddress = [address.street, address.postalCode, address.city].filter(Boolean).join(", ");
+    document.querySelectorAll(".home-map iframe, .map-frame iframe").forEach((mapFrame) => {
       mapFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(mapAddress)}&output=embed`;
       mapFrame.title = `Google Maps: ${mapAddress}`;
-    }
+    });
+    document.querySelectorAll(".map-link").forEach((mapLink) => {
+      mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
+      mapLink.setAttribute("aria-label", `\u00d6ppna ${mapAddress} i Google Maps`);
+    });
   }
 
   if (settings.seoDescription) {
