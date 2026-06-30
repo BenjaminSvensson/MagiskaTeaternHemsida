@@ -7,4 +7,5 @@ dist/
 *.log
 *.pid
 vite-dev.*.log
+studio/.sanity/
 .DS_Store

@@ -21,7 +21,6 @@
 
     <div class="site-shell">
       <header class="site-header" data-header>
-        <div class="notice-bar">Teater, bio, barnkalas och magiska event i Vretstorp</div>
         <nav class="nav" aria-label="Huvudmeny">
           <a class="brand" href="#/hem" data-route-link="hem" aria-label="Magiska Teatern startsida">
             <img src="/mockup-assets/logga-transparent.png" alt="Magiska Teatern" />
@@ -186,6 +185,34 @@
             </div>
           </section>
 
+          <section class="home-location section" aria-labelledby="home-location-title">
+            <div class="location-copy reveal">
+              <p class="eyebrow">Hitta hit</p>
+              <h2 id="home-location-title">Mitt i Vretstorp, n&auml;ra E20.</h2>
+              <p>
+                Magiska Teatern ligger p&aring; Askersundsv&auml;gen 32 med kort promenad fr&aring;n station och buss.
+                Hela v&auml;gbeskrivningen finns p&aring; Hitta hit-sidan.
+              </p>
+              <div class="location-actions">
+                <a class="button primary" href="#/hitta" data-route-link="hitta">Visa karta</a>
+                <a class="button secondary" href="https://www.google.com/maps/search/?api=1&query=Askersundsv%C3%A4gen%2032%2C%20Vretstorp" target="_blank" rel="noreferrer">Google Maps</a>
+              </div>
+            </div>
+            <div class="location-card glass-card reveal">
+              <span>Adress</span>
+              <strong>Askersundsv&auml;gen 32</strong>
+              <p>694 50 Vretstorp</p>
+              <div class="home-map" aria-hidden="true">
+                <iframe
+                  title="Google Maps: Askersundsv&auml;gen 32, Vretstorp"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps?q=Askersundsv%C3%A4gen%2032%2C%20Vretstorp&output=embed"
+                ></iframe>
+              </div>
+            </div>
+          </section>
+
           <section class="quick-paths section" aria-labelledby="paths-title">
             <div class="section-heading reveal">
               <p class="eyebrow">Snabba v&auml;gar</p>
@@ -217,7 +244,7 @@
         </section>
 
         <section class="view" data-page="evenemang">
-          <section class="page-hero section soft-hero">
+          <section class="page-hero section soft-hero compact-page-hero">
             <div>
               <p class="eyebrow">Evenemang och kurser</p>
               <h1>Hitta n&auml;sta kv&auml;ll, kurs eller &auml;ventyr i huset.</h1>
@@ -374,16 +401,49 @@
             </div>
           </section>
 
-          <section class="story-section section">
+          <section class="history-gallery section">
+            <article class="history-lead reveal">
+              <p class="eyebrow">Byggnaden</p>
+              <h2>Fr&aring;n hotellbrand till biograf, arrestcell och magisk scen.</h2>
+              <p>
+                Huset b&auml;r sp&aring;r av Vretstorps hotell, biografteater, bank, k&auml;llararrest, Bio-Johan och
+                illusionisterna som gav platsen namnet Magiska Teatern. Originalets historiska material f&aring;r h&auml;r
+                mer plats och tydligare bilder.
+              </p>
+            </article>
+            <figure class="history-photo reveal large" data-parallax-frame>
+              <img src="/mockup-assets/historik-hotellet.jpg" alt="Vretstorps hotell innan branden" />
+              <figcaption>Eriksdalshotellet, huset som stod h&auml;r fr&aring;n 1896 till branden 1923.</figcaption>
+            </figure>
+            <figure class="history-photo reveal" data-parallax-frame>
+              <img src="/mockup-assets/historik-brand.jpg" alt="Branden som f&ouml;rst&ouml;rde hotellet 1923" />
+              <figcaption>Hotellet brann ner 1923.</figcaption>
+            </figure>
+            <figure class="history-photo reveal tall" data-parallax-frame>
+              <img src="/mockup-assets/historik-biografen.jpg" alt="Tidningsurklipp fr&aring;n Vretstorps biografteater" />
+              <figcaption>Tidningsurklipp fr&aring;n biografteaterns tid.</figcaption>
+            </figure>
+            <figure class="history-photo reveal" data-parallax-frame>
+              <img src="/mockup-assets/historik-renovering.jpg" alt="Renovering av Magiska Teatern" />
+              <figcaption>Fasaden rustades upp och huset fick nytt liv igen.</figcaption>
+            </figure>
+          </section>
+
+          <section class="story-section history-timeline section">
             <div class="timeline-card reveal">
               <span>1896</span>
               <h3>Vretstorps hotell</h3>
-              <p>P&aring; platsen l&aring;g Eriksdalshotellet, ett trev&aring;nings tr&auml;hus som senare brann ner 1923.</p>
+              <p>Eriksdalshotellet byggdes som ett trev&aring;nings tr&auml;hus p&aring; platsen d&auml;r teatern ligger idag.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>1923</span>
+              <h3>Hotellet brinner</h3>
+              <p>Branden l&auml;mnade grunden kvar och blev starten p&aring; n&auml;sta kapitel f&ouml;r fastigheten.</p>
             </div>
             <div class="timeline-card reveal">
               <span>1925</span>
               <h3>Vretstorps biografteater</h3>
-              <p>Byggdes upp igen p&aring; samma grund och fick sin teatersal och biografhistoria.</p>
+              <p>Byggm&auml;stare Edvard Lindstr&ouml;m uppf&ouml;rde Vretstorps biografteater p&aring; samma grund.</p>
             </div>
             <div class="timeline-card reveal">
               <span>1930-tal</span>
@@ -398,7 +458,33 @@
             <div class="timeline-card reveal">
               <span>1990-tal</span>
               <h3>Magin flyttar in</h3>
-              <p>Illusionister tog &ouml;ver, renoverade inv&auml;ndigt och gav huset namnet Magiska Teatern.</p>
+              <p>Love Melander och Stefan Sch&uuml;tzer tog &ouml;ver, renoverade inv&auml;ndigt och gav huset namnet Magiska Teatern.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>2013</span>
+              <h3>F&ouml;reningen bildas</h3>
+              <p>Magiska Teaterns scenkonstf&ouml;rening bildades och huset b&ouml;rjade drivas bredare f&ouml;r kultur och scenkonst.</p>
+            </div>
+            <div class="timeline-card reveal">
+              <span>2015-2016</span>
+              <h3>Upprustning och solel</h3>
+              <p>En yttre renovering f&ouml;ljdes av solceller p&aring; taket och huset blev mikroproducent av solel.</p>
+            </div>
+          </section>
+
+          <section class="magic-era section">
+            <div class="portal-window reveal" data-parallax-frame>
+              <img src="/mockup-assets/historik-hackner.jpg" alt="Carl-Einar H&auml;ckner p&aring; Magiska Teatern" />
+            </div>
+            <div class="portal-copy reveal">
+              <p class="eyebrow">Magi-eran</p>
+              <h2>Scenen har haft riktiga illusionister p&aring; bes&ouml;k.</h2>
+              <p>
+                Under Magiska Teaterns tid har flera illusionister och artister upptr&auml;tt h&auml;r, bland annat namn som
+                Joe Labero, Tobbe Trollkarl och Carl-Einar H&auml;ckner. Det &auml;r den sortens historia som g&ouml;r att sidan
+                f&aring;r vara lite sagolik, inte bara praktisk.
+              </p>
+              <div class="chips"><span>Illusion</span><span>Scenkonst</span><span>Vretstorp</span></div>
             </div>
           </section>
 
@@ -419,7 +505,7 @@
         </section>
 
         <section class="view" data-page="hyra">
-          <section class="page-hero section soft-hero">
+          <section class="page-hero section soft-hero compact-page-hero">
             <div>
               <p class="eyebrow">Hyr & skapa</p>
               <h1>Teaterlokal, event, kostym och rekvisita.</h1>
