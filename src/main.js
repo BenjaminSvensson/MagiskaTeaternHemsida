@@ -1,21 +1,18 @@
-import * as THREE from "three";
 import {setupCmsContent} from "./cms.js";
 
-const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
-const exteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
 const historyHotelUrl = new URL("../mockup-assets/historik-hotellet.jpg", import.meta.url).href;
 const historyFireUrl = new URL("../mockup-assets/historik-brand.jpg", import.meta.url).href;
 const historyCinemaUrl = new URL("../mockup-assets/historik-biografen.jpg", import.meta.url).href;
 const historyRenovationUrl = new URL("../mockup-assets/historik-renovering.jpg", import.meta.url).href;
 
-const heroFloatingImageUrls = [
-  exteriorUrl,
-  theaterRoomUrl,
-  historyHotelUrl,
-  historyFireUrl,
-  historyCinemaUrl,
-  historyRenovationUrl,
-];
+const imageCycles = {
+  history: [
+    {src: historyHotelUrl, alt: "Vretstorps hotell innan branden"},
+    {src: historyFireUrl, alt: "Hotellet brann ner 1923"},
+    {src: historyCinemaUrl, alt: "Tidningsurklipp fr\u00e5n Vretstorps biografteater"},
+    {src: historyRenovationUrl, alt: "Renovering av Magiska Teatern"},
+  ],
+};
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const header = document.querySelector("[data-header]");
@@ -231,242 +228,40 @@ function setupFormsAndActions() {
   });
 }
 
-function createRoundedTexture(url, width = 1024, height = 680) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-      const context = canvas.getContext("2d");
-      const radius = 72;
+function setupImageCycles() {
+  document.querySelectorAll("[data-image-cycle]").forEach((frame) => {
+    const images = imageCycles[frame.dataset.imageCycle] || [];
+    const image = frame.querySelector("img");
+    if (!image || images.length < 2) return;
 
-      context.beginPath();
-      context.moveTo(radius, 0);
-      context.arcTo(width, 0, width, height, radius);
-      context.arcTo(width, height, 0, height, radius);
-      context.arcTo(0, height, 0, 0, radius);
-      context.arcTo(0, 0, width, 0, radius);
-      context.closePath();
-      context.clip();
+    images.forEach(({src}) => {
+      const preload = new Image();
+      preload.src = src;
+    });
 
-      const imageRatio = image.width / image.height;
-      const canvasRatio = width / height;
-      let drawWidth = width;
-      let drawHeight = height;
-      let offsetX = 0;
-      let offsetY = 0;
-
-      if (imageRatio > canvasRatio) {
-        drawWidth = height * imageRatio;
-        offsetX = (width - drawWidth) / 2;
-      } else {
-        drawHeight = width / imageRatio;
-        offsetY = (height - drawHeight) / 2;
-      }
-
-      context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
-      const gradient = context.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "rgba(239, 228, 255, 0.32)");
-      gradient.addColorStop(0.52, "rgba(255, 253, 247, 0)");
-      gradient.addColorStop(1, "rgba(56, 16, 77, 0.32)");
-      context.fillStyle = gradient;
-      context.fillRect(0, 0, width, height);
-
-      const texture = new THREE.CanvasTexture(canvas);
-      texture.colorSpace = THREE.SRGBColorSpace;
-      texture.needsUpdate = true;
-      resolve(texture);
+    let index = 0;
+    const swapImage = () => {
+      index = (index + 1) % images.length;
+      frame.classList.add("is-swapping");
+      window.setTimeout(() => {
+        image.src = images[index].src;
+        image.alt = images[index].alt;
+        frame.classList.remove("is-swapping");
+      }, 220);
     };
-    image.onerror = reject;
-    image.src = url;
-  });
-}
 
-async function setupHeroScene() {
-  const canvas = document.getElementById("hero-canvas");
-  const stage = document.querySelector(".hero-stage");
-  if (!canvas || !stage) return;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    preserveDrawingBuffer: true,
-    powerPreference: "high-performance",
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.8);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const floatingTextureResults = await Promise.allSettled(
-    heroFloatingImageUrls.map((url) => createRoundedTexture(url, 760, 520)),
-  );
-  const floatingTextures = floatingTextureResults
-    .filter((result) => result.status === "fulfilled")
-    .map((result) => result.value);
-
-  if (floatingTextures.length < 2) return;
-
-  const roomMaterial = new THREE.MeshBasicMaterial({
-    map: floatingTextures[0],
-    transparent: true,
-    opacity: 1,
-  });
-  const propsMaterial = new THREE.MeshBasicMaterial({
-    map: floatingTextures[1],
-    transparent: true,
-    opacity: 1,
-  });
-
-  const room = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.05, 1.42),
-    roomMaterial,
-  );
-  room.position.set(-2.18, -1.55, 0.72);
-  room.rotation.z = -0.045;
-  group.add(room);
-
-  const props = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.62, 1.12),
-    propsMaterial,
-  );
-  props.position.set(2.42, 1.22, 0.86);
-  props.rotation.z = 0.075;
-  group.add(props);
-
-  const sparkleGeometry = new THREE.BufferGeometry();
-  const sparkleCount = 54;
-  const positions = new Float32Array(sparkleCount * 3);
-  for (let i = 0; i < sparkleCount; i += 1) {
-    positions[i * 3] = (Math.random() - 0.5) * 7.3;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 4.8;
-    positions[i * 3 + 2] = 0.95 + Math.random() * 0.9;
-  }
-  sparkleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  const sparkles = new THREE.Points(
-    sparkleGeometry,
-    new THREE.PointsMaterial({
-      color: 0xffd36b,
-      size: 0.045,
-      transparent: true,
-      opacity: 0.72,
-      depthWrite: false,
-    }),
-  );
-  group.add(sparkles);
-
-  const purpleGlow = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(0.82, 0.018, 128, 8),
-    new THREE.MeshBasicMaterial({
-      color: 0xa66cff,
-      transparent: true,
-      opacity: 0.42,
-    }),
-  );
-  purpleGlow.position.set(2.42, -1.45, 1.12);
-  purpleGlow.rotation.set(0.9, 0.3, 0.2);
-  group.add(purpleGlow);
-
-  const pointer = { x: 0, y: 0 };
-  stage.addEventListener("pointermove", (event) => {
-    const rect = stage.getBoundingClientRect();
-    pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    document.querySelector(".hero")?.style.setProperty("--mx", `${pointer.x * 22}px`);
-    document.querySelector(".hero")?.style.setProperty("--my", `${pointer.y * 18}px`);
-  });
-
-  stage.addEventListener("pointerleave", () => {
-    pointer.x = 0;
-    pointer.y = 0;
-    document.querySelector(".hero")?.style.setProperty("--mx", "0px");
-    document.querySelector(".hero")?.style.setProperty("--my", "0px");
-  });
-
-  const resize = () => {
-    const { width, height } = stage.getBoundingClientRect();
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  };
-  resize();
-  window.addEventListener("resize", resize);
-
-  const floatingPanels = [
-    {
-      mesh: room,
-      material: roomMaterial,
-      baseY: -1.55,
-      textureIndex: 0,
-      interval: 5.8,
-      nextSwitch: 4.2,
-      cycleStep: 2,
-    },
-    {
-      mesh: props,
-      material: propsMaterial,
-      baseY: 1.22,
-      textureIndex: 1,
-      interval: 6.4,
-      nextSwitch: 6.1,
-      cycleStep: 2,
-    },
-  ];
-
-  const updateFloatingPanel = (panel, time) => {
-    if (time >= panel.nextSwitch) {
-      panel.textureIndex = (panel.textureIndex + panel.cycleStep) % floatingTextures.length;
-      panel.material.map = floatingTextures[panel.textureIndex];
-      panel.material.needsUpdate = true;
-      panel.nextSwitch = time + panel.interval;
-    }
-
-    const timeUntilSwitch = panel.nextSwitch - time;
-    const timeSinceSwitch = panel.interval - timeUntilSwitch;
-    const fadeIn = Math.min(1, timeSinceSwitch / 0.55);
-    const fadeOut = Math.min(1, timeUntilSwitch / 0.55);
-    panel.material.opacity = Math.max(0, Math.min(fadeIn, fadeOut));
-  };
-
-  const clock = new THREE.Clock();
-  const render = () => {
-    const time = clock.getElapsedTime();
-    group.rotation.y += (pointer.x * 0.08 - group.rotation.y) * 0.045;
-    group.rotation.x += (pointer.y * -0.055 - group.rotation.x) * 0.045;
-
-    room.position.y = -1.55 + Math.sin(time * 0.9) * 0.035;
-    props.position.y = 1.22 + Math.cos(time * 0.75) * 0.04;
-    floatingPanels.forEach((panel) => updateFloatingPanel(panel, time));
-    purpleGlow.rotation.x += 0.004;
-    purpleGlow.rotation.z -= 0.003;
-    sparkles.rotation.z = Math.sin(time * 0.18) * 0.04;
-    sparkles.material.opacity = 0.58 + Math.sin(time * 1.8) * 0.16;
-
-    renderer.render(scene, camera);
-    window.__heroCanvasFrames = (window.__heroCanvasFrames || 0) + 1;
     if (!prefersReducedMotion) {
-      requestAnimationFrame(render);
+      window.setInterval(swapImage, 4800);
     }
-  };
-  render();
+  });
 }
 
 setupHeader();
 setupReveals();
 setupTiltCards();
 setupParallaxFrames();
+setupImageCycles();
 setupFilters();
 setupFormsAndActions();
 setupCmsContent();
-setupHeroScene()
-  .catch(() => {
-    document.querySelector(".hero-stage")?.classList.add("is-fallback");
-  })
-  .finally(setupRouter);
+setupRouter();
