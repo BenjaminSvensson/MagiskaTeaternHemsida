@@ -22,6 +22,7 @@
   --radius-xl: 34px;
   --radius-lg: 24px;
   --radius-md: 16px;
+  --header-overlap: 91px;
   color-scheme: light;
 }
 
@@ -420,7 +421,21 @@ select {
   right: clamp(18px, 3vw, 42px);
   bottom: clamp(18px, 3vw, 42px);
   width: min(300px, calc(100% - 36px));
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
   transform: rotate(-1.5deg);
+  transition: transform 190ms ease, box-shadow 190ms ease;
+}
+
+.stage-label:hover,
+.stage-label:focus-visible {
+  transform: translateY(-4px) rotate(-0.6deg);
+}
+
+.stage-label:focus-visible {
+  outline: 3px solid rgba(124, 58, 237, 0.42);
+  outline-offset: 5px;
 }
 
 .stage-label span {
@@ -732,7 +747,14 @@ select {
   border-radius: 28px;
   background: rgba(255, 253, 247, 0.72);
   box-shadow: var(--shadow);
+  scroll-margin-top: 118px;
   transition: opacity 200ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.event-card:target,
+.event-card.is-next-event:target {
+  border-color: rgba(124, 58, 237, 0.42);
+  box-shadow: 0 24px 70px rgba(124, 58, 237, 0.2);
 }
 
 .event-card:nth-child(1) {
@@ -1116,10 +1138,19 @@ select {
 }
 
 .hero {
-  min-height: min(840px, calc(100svh - 138px));
+  width: 100vw;
+  min-height: min(920px, 100svh);
+  margin-top: calc(var(--header-overlap) * -1);
+  margin-left: calc(50% - 50vw);
   grid-template-columns: 1fr;
   align-items: end;
-  padding: clamp(28px, 6vw, 88px);
+  padding:
+    calc(var(--header-overlap) + clamp(42px, 7vw, 112px))
+    clamp(28px, 7vw, 108px)
+    clamp(44px, 7vw, 96px);
+  border-inline: 0;
+  border-top: 0;
+  border-radius: 0;
   background: #efe4ff;
 }
 
@@ -1505,6 +1536,10 @@ select {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --header-overlap: 88px;
+  }
+
   .site-header {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 253, 247, 0.28)),
@@ -1519,8 +1554,12 @@ select {
   }
 
   .hero {
-    min-height: 790px;
-    padding: 20px;
+    min-height: 820px;
+    padding:
+      calc(var(--header-overlap) + 32px)
+      20px
+      24px;
+    border-radius: 0;
     align-items: end;
   }
 

@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import {setupCmsContent} from "./cms.js";
 
-const theaterExteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
 const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
 const propsUrl = new URL("../mockup-assets/rekvisita.jpg", import.meta.url).href;
 
@@ -51,8 +50,12 @@ function setupRouter() {
     hitta: "Hitta hit | Magiska Teatern",
   };
 
-  const normalizeRoute = () => {
-    const raw = window.location.hash.replace(/^#\/?/, "");
+  const getRouteParts = () => {
+    const [route = "", target = ""] = window.location.hash.replace(/^#\/?/, "").split("/");
+    return {route, target};
+  };
+
+  const normalizeRoute = (raw = getRouteParts().route) => {
     if (raw === "kontakt" || raw === "grupper" || raw === "evenemang") return "evenemang";
     if (raw === "hyr") return "hyra";
     if (!raw) return "hem";
@@ -60,9 +63,9 @@ function setupRouter() {
   };
 
   const renderRoute = () => {
-    const raw = window.location.hash.replace(/^#\/?/, "");
-    const targetId = raw === "kontakt" ? "kontakt" : null;
-    const route = normalizeRoute();
+    const {route: rawRoute, target} = getRouteParts();
+    const route = normalizeRoute(rawRoute);
+    const targetId = rawRoute === "kontakt" ? "kontakt" : route === "evenemang" && target === "nasta" ? "next-event" : null;
     pages.forEach((page) => {
       const isActive = page.dataset.page === route;
       page.classList.toggle("is-active", isActive);
@@ -81,6 +84,10 @@ function setupRouter() {
     requestAnimationFrame(() => {
       const target = targetId ? document.getElementById(targetId) : null;
       if (target) {
+        if (targetId === "next-event") {
+          document.querySelectorAll(".filter").forEach((filter) => filter.classList.toggle("active", filter.dataset.filter === "alla"));
+          document.querySelectorAll(".event-card").forEach((card) => card.classList.remove("is-hidden"));
+        }
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -268,16 +275,8 @@ async function setupHeroScene() {
   const group = new THREE.Group();
   scene.add(group);
 
-  const mainTexture = await createRoundedTexture(theaterExteriorUrl, 1200, 820);
   const roomTexture = await createRoundedTexture(theaterRoomUrl, 760, 520);
   const propTexture = await createRoundedTexture(propsUrl, 760, 520);
-
-  const main = new THREE.Mesh(
-    new THREE.PlaneGeometry(6.6, 4.5, 16, 16),
-    new THREE.MeshBasicMaterial({ map: mainTexture, transparent: true }),
-  );
-  main.position.set(0.08, -0.05, 0);
-  group.add(main);
 
   const room = new THREE.Mesh(
     new THREE.PlaneGeometry(2.05, 1.42),

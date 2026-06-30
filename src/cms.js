@@ -36,6 +36,33 @@ const safeUrl = (value) => {
 };
 
 const imageUrl = (image, fallback = fallbackEventImageUrl) => image?.asset?.url || fallback;
+const nextEventPath = "#/evenemang/nasta";
+
+const slugify = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+
+const eventDomId = (event) => `event-${slugify(event.slug || event._id || event.title || "kommande")}`;
+
+const eventTimestamp = (event) => {
+  const time = Date.parse(event?.startDateTime || "");
+  return Number.isFinite(time) ? time : Number.POSITIVE_INFINITY;
+};
+
+const upcomingEvents = (events = []) => {
+  const now = Date.now();
+  return [...events]
+    .filter((event) => {
+      const displayUntil = Date.parse(event.endDateTime || event.startDateTime || "");
+      return !Number.isFinite(displayUntil) || displayUntil >= now;
+    })
+    .sort((a, b) => eventTimestamp(a) - eventTimestamp(b));
+};
 
 const toPlainText = (blocks) => {
   if (!Array.isArray(blocks)) return "";
@@ -67,7 +94,9 @@ async function fetchSanityContent() {
       isPublished == true &&
       coalesce(endDateTime, startDateTime) >= "${now}"
     ] | order(startDateTime asc) {
+      _id,
       title,
+      "slug": slug.current,
       summary,
       description,
       startDateTime,
@@ -142,7 +171,7 @@ function eventLabel(event) {
   return [date, time && `kl ${time}`].filter(Boolean).join(" ");
 }
 
-function renderEventCard(event) {
+function renderEventCard(event, index = 0) {
   const date = formatDate(event.startDateTime);
   const time = formatTime(event.startDateTime);
   const image = imageUrl(event.image);
@@ -152,14 +181,16 @@ function renderEventCard(event) {
   const description = event.summary || toPlainText(event.description);
   const category = event.category || "biljetter";
   const target = url.startsWith(window.location.origin) || url.startsWith("mailto:") ? "" : ' target="_blank" rel="noreferrer"';
+  const isNext = index === 0;
+  const id = isNext ? "next-event" : eventDomId(event);
 
   return `
-    <article class="event-card reveal is-visible" data-category="${escapeHtml(category)}">
+    <article class="event-card reveal is-visible${isNext ? " is-next-event" : ""}" id="${escapeHtml(id)}" data-category="${escapeHtml(category)}">
       <div class="event-image" data-parallax-frame>
         <img src="${escapeHtml(image)}" alt="${escapeHtml(alt)}" />
       </div>
       <div class="event-body">
-        <p class="micro">${event.featured ? "N\u00e4sta p\u00e5 scen" : "Kommande"}</p>
+        <p class="micro">${isNext ? "N\u00e4sta p\u00e5 scen" : "Kommande"}</p>
         <h3>${escapeHtml(event.title)}</h3>
         <p>${escapeHtml(description)}</p>
         <div class="chips">
@@ -175,37 +206,47 @@ function renderEventCard(event) {
 
 function renderEvents(events = []) {
   const eventList = document.querySelector(".event-list");
-  if (!eventList || !events.length) return;
+  const sortedEvents = upcomingEvents(events);
+  if (!eventList || !sortedEvents.length) return;
 
-  eventList.innerHTML = events.map(renderEventCard).join("");
-  updateFeaturedEvent(events);
+  eventList.innerHTML = sortedEvents.map(renderEventCard).join("");
+  updateFeaturedEvent(sortedEvents);
+  scrollToNextEventIfRequested();
 }
 
 function updateFeaturedEvent(events) {
-  const featured = events.find((event) => event.featured) || events[0];
-  if (!featured) return;
+  const nextEvent = upcomingEvents(events)[0];
+  if (!nextEvent) return;
 
-  const label = eventLabel(featured);
-  setText(".stage-label strong", `${featured.title}${label ? ` ${label}` : ""}`);
+  const label = eventLabel(nextEvent);
+  const description = nextEvent.summary || toPlainText(nextEvent.description);
+  setText(".stage-label strong", `${nextEvent.title}${label ? ` ${label}` : ""}`);
+  setText(".home-feature .feature-panel h2", nextEvent.title);
 
-  const eventLink = safeUrl(featured.ctaUrl);
-  const primaryHomeLink = document.querySelector(".home-feature .button.primary");
-  if (primaryHomeLink && eventLink) {
-    primaryHomeLink.href = eventLink;
-    primaryHomeLink.textContent = featured.ctaLabel || "L\u00e4s mer";
+  const featureText = document.querySelector(".home-feature .feature-panel > p:not(.eyebrow)");
+  if (featureText && description) {
+    featureText.textContent = description;
   }
+
+  document.querySelectorAll("[data-next-event-link]").forEach((link) => {
+    link.setAttribute("href", nextEventPath);
+    link.setAttribute("aria-label", `G\u00e5 till ${nextEvent.title} i evenemangslistan`);
+  });
+
+  const primaryHomeLink = document.querySelector(".home-feature .button.primary");
+  if (primaryHomeLink) primaryHomeLink.textContent = "Till evenemanget";
 
   const poster = document.querySelector(".poster-stack img");
   if (poster) {
-    poster.src = imageUrl(featured.image, fallbackRoomImageUrl);
-    poster.alt = featured.image?.alt || featured.title;
+    poster.src = imageUrl(nextEvent.image, fallbackRoomImageUrl);
+    poster.alt = nextEvent.image?.alt || nextEvent.title;
   }
 
   const metaValues = [
-    label && ["Tid", label],
-    featured.location && ["Plats", featured.location],
-    featured.price && ["Pris", featured.price],
-  ].filter(Boolean);
+    ["Tid", label || "Datum kommer snart"],
+    ["Plats", nextEvent.location || "Askersundsv\u00e4gen 32"],
+    ["Pris", nextEvent.price || "Se evenemangsinfo"],
+  ];
 
   document.querySelectorAll(".home-feature .meta").forEach((meta, index) => {
     const value = metaValues[index];
@@ -213,6 +254,14 @@ function updateFeaturedEvent(events) {
     const [labelText, text] = value;
     meta.querySelector("b").textContent = labelText;
     meta.querySelector("span").textContent = text;
+  });
+}
+
+function scrollToNextEventIfRequested() {
+  const targetRequested = window.location.hash.replace(/^#\/?/, "") === "evenemang/nasta";
+  if (!targetRequested) return;
+  requestAnimationFrame(() => {
+    document.getElementById("next-event")?.scrollIntoView({behavior: "smooth", block: "start"});
   });
 }
 

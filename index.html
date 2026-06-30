@@ -52,10 +52,10 @@
               <canvas id="hero-canvas"></canvas>
               <img class="hero-fallback" src="/mockup-assets/teaterniregn.jpg" alt="" />
               <div class="hero-photo-fade" aria-hidden="true"></div>
-              <div class="stage-label glass-card">
+              <a class="stage-label glass-card" href="#/evenemang/nasta" data-next-event-link aria-label="G&aring; till n&auml;sta evenemang">
                 <span>N&auml;sta p&aring; scen</span>
                 <strong>Teaterkonsert 22 mars kl 14:00</strong>
-              </div>
+              </a>
               <div class="stage-chip">
                 <span>150 platser</span>
                 <span>Scen & bar</span>
@@ -72,6 +72,26 @@
                 <a class="button primary" href="#/evenemang" data-route-link="evenemang">Se evenemang</a>
                 <a class="button secondary" href="#/hyra" data-route-link="hyra">Hyr lokalen</a>
               </div>
+            </div>
+          </section>
+
+          <section class="home-feature section">
+            <article class="feature-panel reveal">
+              <p class="eyebrow">Kommande evenemang</p>
+              <h2>Biljetter, anm&auml;lan och f&ouml;rfr&aring;gan utan att beh&ouml;va leta.</h2>
+              <p>
+                Startsidan samlar de viktigaste v&auml;garna f&ouml;rst: k&ouml;p biljett till n&auml;sta evenemang,
+                anm&auml;l teatergrupp eller bioklubb, hyr lokalen och hitta kontaktv&auml;gen.
+              </p>
+              <div class="meta-row">
+                <div class="meta"><b>Tid</b><span>S&ouml;ndag 22 mars, 14:00</span></div>
+                <div class="meta"><b>Plats</b><span>Askersundsv&auml;gen 32</span></div>
+                <div class="meta"><b>Pris</b><span>250 kr / 100 kr medlem</span></div>
+              </div>
+              <a class="button primary" href="#/evenemang/nasta" data-next-event-link>Till evenemanget</a>
+            </article>
+            <div class="poster-stack reveal">
+              <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
             </div>
           </section>
 
@@ -101,26 +121,6 @@
                 <strong>Medlem & sponsor</strong>
                 <p>Bli medlem, volont&auml;r, st&ouml;dmedlem eller samarbetspartner.</p>
               </a>
-            </div>
-          </section>
-
-          <section class="home-feature section">
-            <article class="feature-panel reveal">
-              <p class="eyebrow">Kommande evenemang</p>
-              <h2>Biljetter, anm&auml;lan och f&ouml;rfr&aring;gan utan att beh&ouml;va leta.</h2>
-              <p>
-                Startsidan samlar de viktigaste v&auml;garna f&ouml;rst: k&ouml;p biljett till n&auml;sta evenemang,
-                anm&auml;l teatergrupp eller bioklubb, hyr lokalen och hitta kontaktv&auml;gen.
-              </p>
-              <div class="meta-row">
-                <div class="meta"><b>Tid</b><span>S&ouml;ndag 22 mars, 14:00</span></div>
-                <div class="meta"><b>Plats</b><span>Askersundsv&auml;gen 32</span></div>
-                <div class="meta"><b>Pris</b><span>250 kr / 100 kr medlem</span></div>
-              </div>
-              <a class="button primary" href="#/evenemang" data-route-link="evenemang">Till evenemang</a>
-            </article>
-            <div class="poster-stack reveal">
-              <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
             </div>
           </section>
         </section>
@@ -162,7 +162,7 @@
 
             <div class="event-layout">
               <div class="event-list">
-                <article class="event-card reveal" data-category="biljetter">
+                <article class="event-card reveal is-next-event" id="next-event" data-category="biljetter">
                   <div class="event-image poster-frame" data-parallax-frame>
                     <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
                   </div>
