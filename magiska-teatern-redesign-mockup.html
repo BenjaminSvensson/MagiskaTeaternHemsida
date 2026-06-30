@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magiska Teatern Redesign Mockup</title>
+  <style>
+    :root {
+      --ink: #100914;
+      --stage: #17101d;
+      --aubergine: #2a123a;
+      --purple: #6e46f2;
+      --violet: #9a72ff;
+      --lavender: #d8c7ff;
+      --gold: #f1bd66;
+      --coral: #ed5f55;
+      --mint: #83c9b8;
+      --cream: #fff6e7;
+      --paper: #f7efe0;
+      --muted: #aa9db8;
+      --line: rgba(255, 255, 255, 0.16);
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+      --soft-shadow: 0 14px 34px rgba(13, 3, 20, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--cream);
+      background:
+        linear-gradient(135deg, #0d0812 0%, #20102c 42%, #120c17 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.35;
+      scrollbar-width: none;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .mockup-shell {
+      width: 1800px;
+      margin: 0 auto;
+      padding: 52px 58px 74px;
+    }
+
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .deck-header h1 {
+      margin: 0;
+      max-width: 980px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 58px;
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .deck-header p {
+      margin: 16px 0 0;
+      max-width: 760px;
+      color: var(--lavender);
+      font-size: 20px;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(5, 46px);
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .swatch {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .page {
+      position: relative;
+      min-height: 1240px;
+      margin: 0 0 54px;
+      padding: 38px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255, 246, 231, 0.08), rgba(255, 246, 231, 0.02)),
+        linear-gradient(135deg, rgba(110, 70, 242, 0.32), rgba(237, 95, 85, 0.10) 52%, rgba(131, 201, 184, 0.10)),
+        var(--stage);
+      box-shadow: var(--shadow);
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 76%);
+    }
+
+    .page-kicker {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      color: var(--lavender);
+      font-size: 14px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .device-row {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1240px 360px;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .browser-frame,
+    .phone-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .browser-frame {
+      border-radius: 24px;
+    }
+
+    .phone-frame {
+      border-radius: 40px;
+      padding: 14px;
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)),
+        #0f0914;
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 18px;
+      background: #0f0914;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .dot:nth-child(2) {
+      background: var(--gold);
+    }
+
+    .dot:nth-child(3) {
+      background: var(--mint);
+    }
+
+    .site {
+      overflow: hidden;
+      color: var(--cream);
+      background: #120a16;
+    }
+
+    .desktop {
+      width: 100%;
+      min-height: 1040px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 86px;
+      padding: 0 38px;
+      background: rgba(16, 9, 20, 0.82);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand img {
+      width: 206px;
+      height: auto;
+      border-radius: 9px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: rgba(255, 246, 231, 0.82);
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .cta,
+    .ghost-cta,
+    .small-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .cta {
+      color: #160917;
+      background: linear-gradient(135deg, var(--gold), #ffe3a1);
+      box-shadow: 0 16px 30px rgba(241, 189, 102, 0.25);
+    }
+
+    .ghost-cta {
+      color: var(--cream);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 520px 1fr;
+      gap: 36px;
+      min-height: 560px;
+      padding: 58px 38px 38px;
+      background:
+        linear-gradient(90deg, rgba(18, 10, 22, 0.96), rgba(18, 10, 22, 0.70) 58%, rgba(18, 10, 22, 0.18)),
+        url("mockup-assets/teaterniregn.jpg") center / cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 8px 12px;
+      color: var(--gold);
+      border: 1px solid rgba(241, 189, 102, 0.32);
+      border-radius: 999px;
+      background: rgba(241, 189, 102, 0.08);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero h2 {
+      margin: 0;
+      max-width: 530px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 74px;
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 22px 0 28px;
+      max-width: 500px;
+      color: rgba(255, 246, 231, 0.82);
+      font-size: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-stack {
+      position: relative;
+      min-height: 500px;
+    }
+
+    .stage-card {
+      position: absolute;
+      right: 28px;
+      top: 18px;
+      width: 470px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 22px;
+      background: rgba(255, 246, 231, 0.09);
+      box-shadow: var(--shadow);
+    }
+
+    .stage-card img {
+      height: 280px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .stage-card .caption,
+    .floating-card .caption {
+      padding: 18px 20px;
+      background:
+        linear-gradient(135deg, rgba(110, 70, 242, 0.32), rgba(16, 9, 20, 0.94));
+    }
+
+    .caption strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .caption span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 246, 231, 0.72);
+      font-size: 14px;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 14px;
+      bottom: 28px;
+      width: 250px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 18px;
+      background: rgba(16, 9, 20, 0.92);
+      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.38);
+    }
+
+    .floating-card img {
+      height: 160px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .event-chip {
+      position: absolute;
+      right: 0;
+      bottom: 60px;
+      width: 300px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff6e7, #e8dbff);
+      color: #1a0d20;
+      box-shadow: 0 22px 52px rgba(0, 0, 0, 0.30);
+    }
+
+    .event-chip .date {
+      color: var(--coral);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+    }
+
+    .event-chip strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 22px;
+      line-height: 1.05;
+    }
+
+    .event-chip p {
+      color: rgba(26, 13, 32, 0.72);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 30px 38px 36px;
+      background:
+        linear-gradient(180deg, #120a16, #1d0f28);
+    }
+
+    .quick-card {
+      min-height: 176px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--soft-shadow);
+    }
+
+    .quick-card b {
+      display: block;
+      color: var(--gold);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .quick-card strong {
+      display: block;
+      margin: 12px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      line-height: 1.02;
+    }
+
+    .quick-card span {
+      color: rgba(255, 246, 231, 0.70);
+      font-size: 14px;
+    }
+
+    .event-section {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 30px;
+      padding: 34px 38px 44px;
+      background: #f7efe0;
+      color: #170d1b;
+    }
+
+    .poster-wrap {
+      position: relative;
+      min-height: 410px;
+    }
+
+    .poster-wrap img {
+      position: relative;
+      z-index: 2;
+      width: 280px;
+      border-radius: 18px;
+      box-shadow: 0 24px 42px rgba(58, 26, 78, 0.28);
+    }
+
+    .poster-wrap::after {
+      content: "";
+      position: absolute;
+      left: 34px;
+      top: 30px;
+      width: 280px;
+      height: 360px;
+      border-radius: 18px;
+      background: var(--purple);
+      opacity: 0.24;
+      transform: rotate(5deg);
+    }
+
+    .event-copy h3 {
+      margin: 4px 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 52px;
+      line-height: 0.98;
+      letter-spacing: 0;
+      color: #210d2c;
+    }
+
+    .event-copy p {
+      margin: 0 0 22px;
+      max-width: 620px;
+      color: rgba(28, 12, 34, 0.72);
+      font-size: 18px;
+    }
+
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 690px;
+      margin-top: 20px;
+    }
+
+    .info-tile {
+      padding: 15px 16px;
+      border-radius: 16px;
+      background: #fffaf0;
+      border: 1px solid rgba(42, 18, 58, 0.12);
+    }
+
+    .info-tile b {
+      display: block;
+      color: var(--coral);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .info-tile span {
+      display: block;
+      margin-top: 5px;
+      font-weight: 800;
+    }
+
+    .phone-screen {
+      overflow: hidden;
+      border-radius: 30px;
+      min-height: 780px;
+      background: #120a16;
+      color: var(--cream);
+    }
+
+    .mobile-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 66px;
+      padding: 0 18px;
+      background: rgba(16, 9, 20, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .mobile-nav img {
+      width: 142px;
+      border-radius: 8px;
+    }
+
+    .hamburger {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      background:
+        linear-gradient(var(--cream), var(--cream)) 50% 11px / 16px 2px no-repeat,
+        linear-gradient(var(--cream), var(--cream)) 50% 17px / 16px 2px no-repeat,
+        linear-gradient(var(--cream), var(--cream)) 50% 23px / 16px 2px no-repeat,
+        rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-hero {
+      padding: 18px;
+      min-height: 330px;
+      background:
+        linear-gradient(180deg, rgba(18, 10, 22, 0.20), rgba(18, 10, 22, 0.92)),
+        url("mockup-assets/teaterniregn.jpg") center / cover no-repeat;
+    }
+
+    .mobile-hero h2 {
+      margin: 154px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 43px;
+      line-height: 0.94;
+    }
+
+    .mobile-hero p {
+      margin: 0 0 14px;
+      color: rgba(255, 246, 231, 0.76);
+      font-size: 14px;
+    }
+
+    .mobile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .small-cta {
+      min-height: 40px;
+      padding: 0 12px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .mobile-content {
+      padding: 18px;
+      background: linear-gradient(180deg, #120a16, #21102e);
+    }
+
+    .mobile-card {
+      margin-bottom: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .mobile-card strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .mobile-card span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 246, 231, 0.68);
+      font-size: 13px;
+    }
+
+    .mini-event {
+      overflow: hidden;
+      padding: 0;
+      background: var(--paper);
+      color: #170d1b;
+    }
+
+    .mini-event img {
+      width: 100%;
+      height: 138px;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .mini-event div {
+      padding: 14px;
+    }
+
+    .mini-event b {
+      color: var(--coral);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mini-event strong {
+      margin-top: 5px;
+      line-height: 1.08;
+    }
+
+    .mini-event span {
+      color: rgba(26, 13, 32, 0.68);
+    }
+
+    .listing {
+      min-height: 1040px;
+      background: #130a17;
+    }
+
+    .listing-hero {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 34px;
+      padding: 44px 38px 34px;
+      background:
+        linear-gradient(90deg, rgba(18, 10, 22, 0.96), rgba(42, 18, 58, 0.72)),
+        url("mockup-assets/lokalen-fran-scenen.jpg") center / cover no-repeat;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .listing-hero h2 {
+      margin: 0;
+      max-width: 680px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 64px;
+      line-height: 0.98;
+    }
+
+    .listing-hero p {
+      max-width: 660px;
+      color: rgba(255, 246, 231, 0.78);
+      font-size: 18px;
+    }
+
+    .date-card {
+      align-self: end;
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--paper), #e8dbff);
+      color: #1a0d20;
+      box-shadow: var(--shadow);
+    }
+
+    .date-card b {
+      color: var(--coral);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 12px;
+    }
+
+    .date-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 24px;
+      line-height: 1.05;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      padding: 24px 38px 8px;
+    }
+
+    .filter-pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 246, 231, 0.78);
+      background: rgba(255, 255, 255, 0.06);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .filter-pill.active {
+      color: #170d1b;
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+
+    .event-list {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      padding: 22px 38px 42px;
+    }
+
+    .ticket-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .ticket-card {
+      display: grid;
+      grid-template-columns: 162px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 184px;
+      padding: 16px;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035));
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .ticket-card img {
+      width: 162px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .ticket-card h3 {
+      margin: 0 0 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      line-height: 1.02;
+    }
+
+    .ticket-card p {
+      margin: 0;
+      max-width: 470px;
+      color: rgba(255, 246, 231, 0.68);
+      font-size: 15px;
+    }
+
+    .ticket-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      color: #1a0d20;
+    }
+
+    .ticket-meta span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--lavender);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fff6e7, #eee1ff);
+      color: #170d1b;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.04;
+    }
+
+    .panel p {
+      margin: 0 0 16px;
+      color: rgba(23, 13, 27, 0.70);
+      font-size: 14px;
+    }
+
+    .panel.dark {
+      color: var(--cream);
+      background:
+        linear-gradient(135deg, rgba(110, 70, 242, 0.36), rgba(237, 95, 85, 0.18)),
+        #20102b;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .field {
+      height: 44px;
+      margin-top: 10px;
+      border-radius: 12px;
+      background: rgba(16, 9, 20, 0.08);
+      border: 1px solid rgba(16, 9, 20, 0.13);
+    }
+
+    .mobile-listing-hero {
+      padding: 18px;
+      min-height: 290px;
+      background:
+        linear-gradient(180deg, rgba(18, 10, 22, 0.10), rgba(18, 10, 22, 0.92)),
+        url("mockup-assets/lokalen-fran-scenen.jpg") center / cover no-repeat;
+    }
+
+    .mobile-listing-hero h2 {
+      margin: 136px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 40px;
+      line-height: 0.96;
+    }
+
+    .mobile-filters {
+      display: flex;
+      gap: 8px;
+      padding: 14px 18px 0;
+      overflow: hidden;
+    }
+
+    .mobile-ticket {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      margin-bottom: 12px;
+    }
+
+    .mobile-ticket img {
+      width: 92px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .mobile-ticket h3 {
+      margin: 0 0 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.04;
+    }
+
+    .mobile-ticket p {
+      margin: 0 0 10px;
+      color: rgba(255, 246, 231, 0.67);
+      font-size: 12px;
+    }
+
+    .booking-bar {
+      position: sticky;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 18px;
+      background: rgba(16, 9, 20, 0.94);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .booking-bar strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .booking-bar span {
+      color: rgba(255, 246, 231, 0.60);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="mockup-shell">
+    <header class="deck-header">
+      <div>
+        <h1>Magiska Teatern redesign mockup</h1>
+        <p>En lila scenisk riktning med riktiga teaterbilder, djupare lager och tydliga vägar till biljetter, anmälan, lokalhyra och kontakt.</p>
+      </div>
+      <div class="palette" aria-label="Färgpalett">
+        <span class="swatch" style="background:#100914"></span>
+        <span class="swatch" style="background:#6e46f2"></span>
+        <span class="swatch" style="background:#ed5f55"></span>
+        <span class="swatch" style="background:#f1bd66"></span>
+        <span class="swatch" style="background:#83c9b8"></span>
+      </div>
+    </header>
+
+    <section class="page">
+      <div class="page-kicker">
+        <span>Page 1 / Startsida</span>
+        <span>Desktop + mobil</span>
+      </div>
+      <div class="device-row">
+        <div class="browser-frame">
+          <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="site desktop">
+            <nav class="nav">
+              <div class="brand"><img src="mockup-assets/logga-lila.png" alt="Magiska Teatern"></div>
+              <div class="nav-links">
+                <span>Om huset</span>
+                <span>Evenemang</span>
+                <span>Teatergrupper</span>
+                <span>Hyr teatern</span>
+                <span>Kontakt</span>
+                <span class="cta">Köp biljett</span>
+              </div>
+            </nav>
+            <section class="hero">
+              <div>
+                <span class="eyebrow">Där drömmar blir verklighet</span>
+                <h2>En scen för sagor, skratt och modiga idéer.</h2>
+                <p>Teater, bio, magi och möten i ett historiskt scenhus i Vretstorp, mitt mellan Stockholm och Göteborg.</p>
+                <div class="hero-actions">
+                  <span class="cta">Se kommande evenemang</span>
+                  <span class="ghost-cta">Hyr lokalen</span>
+                </div>
+              </div>
+              <div class="hero-stack">
+                <div class="stage-card">
+                  <img src="mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersal sedd från scenen">
+                  <div class="caption">
+                    <strong>Historisk salong, modernare upplevelse</strong>
+                    <span>Scen, bio, bar, loger och plats för upp till 150 personer.</span>
+                  </div>
+                </div>
+                <div class="floating-card">
+                  <img src="mockup-assets/rekvisita.jpg" alt="Kostym och rekvisita">
+                  <div class="caption">
+                    <strong>Rekvisita & kostym</strong>
+                    <span>För föreställningar, event och äventyr.</span>
+                  </div>
+                </div>
+                <div class="event-chip">
+                  <span class="date">Nästa på scen</span>
+                  <strong>Teaterkonsert 22 mars kl 14:00</strong>
+                  <p>Kunde jag följa dig, om Karin Boyes liv.</p>
+                </div>
+              </div>
+            </section>
+            <section class="quick-grid">
+              <div class="quick-card">
+                <b>Spela</b>
+                <strong>Teatergrupper</strong>
+                <span>Dansdrama, barnteater, stora gruppen och vuxengrupp.</span>
+              </div>
+              <div class="quick-card">
+                <b>Se</b>
+                <strong>Bioklubben</strong>
+                <span>Filmvisningar i Vretstorps gamla biograf med mysiga stolar.</span>
+              </div>
+              <div class="quick-card">
+                <b>Samlas</b>
+                <strong>Hyr lokalen</strong>
+                <span>Teater, konferens, fest, mässa, show eller föreläsning.</span>
+              </div>
+              <div class="quick-card">
+                <b>Skapa</b>
+                <strong>Egna event</strong>
+                <span>Magishow, barnkalas, smink, Halloween och temaäventyr.</span>
+              </div>
+            </section>
+            <section class="event-section">
+              <div class="poster-wrap">
+                <img src="mockup-assets/event-affisch.png" alt="Affisch för Teaterkonsert">
+              </div>
+              <div class="event-copy">
+                <span class="eyebrow">Kommande evenemang</span>
+                <h3>Köp biljetter eller anmäl dig direkt från startsidan.</h3>
+                <p>Startsidan lyfter nästa aktuella händelse, men behåller snabbvägar till hela kalendern, teatergrupperna och kontakt för lokalförfrågningar.</p>
+                <span class="cta">Köp biljetter</span>
+                <div class="info-strip">
+                  <div class="info-tile"><b>Tid</b><span>Söndag 22 mars, 14:00</span></div>
+                  <div class="info-tile"><b>Plats</b><span>Askersundsvägen 30</span></div>
+                  <div class="info-tile"><b>Pris</b><span>250 kr / 100 kr medlem</span></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <nav class="mobile-nav">
+              <img src="mockup-assets/logga-lila.png" alt="Magiska Teatern">
+              <span class="hamburger"></span>
+            </nav>
+            <section class="mobile-hero">
+              <h2>En scen för sagor och skratt.</h2>
+              <p>Teater, bio och magi i Vretstorp.</p>
+              <div class="mobile-actions">
+                <span class="small-cta cta">Biljetter</span>
+                <span class="small-cta ghost-cta">Hyr lokal</span>
+              </div>
+            </section>
+            <section class="mobile-content">
+              <div class="mobile-card">
+                <strong>Teatergrupper VT 2026</strong>
+                <span>Dansdrama, barnteater och vuxengrupp. Terminsavgift 750 kr.</span>
+              </div>
+              <div class="mobile-card mini-event">
+                <img src="mockup-assets/event-affisch.png" alt="Teaterkonsert affisch">
+                <div>
+                  <b>Nästa evenemang</b>
+                  <strong>Teaterkonsert: Kunde jag följa dig</strong>
+                  <span>Söndag 22 mars kl 14:00</span>
+                </div>
+              </div>
+              <div class="mobile-card">
+                <strong>Snabba val</strong>
+                <span>Bioklubben, Hyr teatern, Rekvisita, Kontakt.</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-kicker">
+        <span>Page 2 / Evenemang & bokning</span>
+        <span>Desktop + mobil</span>
+      </div>
+      <div class="device-row">
+        <div class="browser-frame">
+          <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="site desktop listing">
+            <nav class="nav">
+              <div class="brand"><img src="mockup-assets/logga-lila.png" alt="Magiska Teatern"></div>
+              <div class="nav-links">
+                <span>Alla evenemang</span>
+                <span>Kurser</span>
+                <span>Bio</span>
+                <span>Hyr event</span>
+                <span class="cta">Boka nu</span>
+              </div>
+            </nav>
+            <section class="listing-hero">
+              <div>
+                <span class="eyebrow">Evenemang och kurser</span>
+                <h2>Hitta nästa kväll, kurs eller äventyr i huset.</h2>
+                <p>Kalendern blir enklare att skanna: kommande evenemang, teatergrupper, bioklubb och hyrbara upplevelser får samma bokningslogik.</p>
+              </div>
+              <div class="date-card">
+                <b>Närmast nu</b>
+                <strong>Teaterkonsert 22 mars kl 14:00</strong>
+                <p>Köp biljett eller fråga om medlemspris.</p>
+              </div>
+            </section>
+            <div class="filters">
+              <span class="filter-pill active">Alla</span>
+              <span class="filter-pill">Biljetter</span>
+              <span class="filter-pill">Kurser</span>
+              <span class="filter-pill">Barn</span>
+              <span class="filter-pill">Hyrbart</span>
+            </div>
+            <section class="event-list">
+              <div class="ticket-list">
+                <article class="ticket-card">
+                  <img src="mockup-assets/event-affisch.png" alt="Teaterkonsert affisch">
+                  <div>
+                    <h3>Teaterkonsert: Kunde jag följa dig</h3>
+                    <p>En föreställning om Karin Boyes liv och dikter, med tonsatt poesi.</p>
+                    <div class="ticket-meta"><span>22 mars</span><span>14:00</span><span>Biljetter</span></div>
+                  </div>
+                  <span class="cta">Köp</span>
+                </article>
+                <article class="ticket-card">
+                  <img src="mockup-assets/kalas.jpg" alt="Barnkalas på teatern">
+                  <div>
+                    <h3>Teatergrupper för barn</h3>
+                    <p>Dansdrama, lilla och stora teatergruppen med lek, fantasi och scenmod.</p>
+                    <div class="ticket-meta"><span>VT 2026</span><span>750 kr</span><span>Anmälan</span></div>
+                  </div>
+                  <span class="cta">Anmäl</span>
+                </article>
+                <article class="ticket-card">
+                  <img src="mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen">
+                  <div>
+                    <h3>Hyr teatern för ditt event</h3>
+                    <p>Fest, konferens, filmvisning, föreställning eller en helt egen magisk kväll.</p>
+                    <div class="ticket-meta"><span>150 platser</span><span>Bar</span><span>Scen</span></div>
+                  </div>
+                  <span class="cta">Fråga</span>
+                </article>
+              </div>
+              <aside class="side-panel">
+                <div class="panel">
+                  <h3>Snabb bokningspanel</h3>
+                  <p>Välj typ av ärende och låt formuläret styra till rätt kontaktflöde.</p>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <span class="cta" style="margin-top:14px;">Skicka förfrågan</span>
+                </div>
+                <div class="panel dark">
+                  <h3>Hitta hit</h3>
+                  <p>Askersundsvägen 30, Vretstorp. Parkering i närheten och buss via Hallsberg/Örebro/Laxå.</p>
+                  <span class="ghost-cta">Visa vägbeskrivning</span>
+                </div>
+              </aside>
+            </section>
+          </div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <nav class="mobile-nav">
+              <img src="mockup-assets/logga-lila.png" alt="Magiska Teatern">
+              <span class="hamburger"></span>
+            </nav>
+            <section class="mobile-listing-hero">
+              <h2>Evenemang och kurser</h2>
+              <p>Biljetter, anmälan och förfrågningar på samma plats.</p>
+            </section>
+            <div class="mobile-filters">
+              <span class="filter-pill active">Alla</span>
+              <span class="filter-pill">Biljetter</span>
+              <span class="filter-pill">Kurser</span>
+            </div>
+            <section class="mobile-content">
+              <article class="mobile-ticket">
+                <img src="mockup-assets/event-affisch.png" alt="Teaterkonsert affisch">
+                <div>
+                  <h3>Kunde jag följa dig</h3>
+                  <p>22 mars kl 14:00. Teaterkonsert om Karin Boye.</p>
+                  <span class="small-cta cta">Köp biljett</span>
+                </div>
+              </article>
+              <article class="mobile-ticket">
+                <img src="mockup-assets/kalas.jpg" alt="Barnkalas">
+                <div>
+                  <h3>Teatergrupper VT26</h3>
+                  <p>Grupper för barn, unga och vuxna.</p>
+                  <span class="small-cta ghost-cta">Anmäl intresse</span>
+                </div>
+              </article>
+              <article class="mobile-ticket">
+                <img src="mockup-assets/lokalen-fran-scenen.jpg" alt="Teatersalen">
+                <div>
+                  <h3>Hyr lokalen</h3>
+                  <p>Scen, bar, loger och plats för 150.</p>
+                  <span class="small-cta ghost-cta">Skicka fråga</span>
+                </div>
+              </article>
+            </section>
+            <div class="booking-bar">
+              <div><strong>Behöver du hjälp?</strong><span>emma@magiskateatern.se</span></div>
+              <span class="small-cta cta">Kontakt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

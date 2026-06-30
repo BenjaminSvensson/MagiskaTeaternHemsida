@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magiska Teatern Light Redesign Mockup</title>
+  <style>
+    :root {
+      --ink: #22132b;
+      --deep: #3a0f52;
+      --purple: #7c3aed;
+      --purple-2: #a56bff;
+      --lavender: #eadcff;
+      --sky: #71b7ec;
+      --blue: #3e78f0;
+      --pink: #ff5b9e;
+      --coral: #ff745d;
+      --lime: #d9ef38;
+      --butter: #ffd36b;
+      --cream: #fff8ea;
+      --paper: #fffdf7;
+      --mint: #cfeee1;
+      --line: rgba(58, 15, 82, 0.14);
+      --shadow: 0 20px 44px rgba(79, 28, 114, 0.20);
+      --heavy-shadow: 0 34px 80px rgba(79, 28, 114, 0.26);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      scrollbar-width: none;
+    }
+
+    body {
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, #fff8ea 0%, #efe2ff 40%, #f7efff 72%, #f1fbff 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.34;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .board {
+      width: 1900px;
+      margin: 0 auto;
+      padding: 56px 66px 68px;
+    }
+
+    .board-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 36px;
+      margin-bottom: 34px;
+    }
+
+    .board-head h1 {
+      margin: 0;
+      max-width: 900px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 62px;
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .board-head p {
+      max-width: 760px;
+      margin: 14px 0 0;
+      color: rgba(58, 15, 82, 0.66);
+      font-size: 22px;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(6, 46px);
+      gap: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(53, 19, 66, 0.10);
+      box-shadow: var(--shadow);
+    }
+
+    .swatch {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(23, 53, 45, 0.12);
+    }
+
+    .page {
+      position: relative;
+      margin-bottom: 54px;
+      padding: 38px;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(53, 19, 66, 0.12);
+      background:
+        linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(234, 220, 255, 0.72) 34%, rgba(255, 91, 158, 0.08) 64%, rgba(113, 183, 236, 0.14)),
+        #fffdf7;
+      box-shadow: var(--heavy-shadow);
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.45;
+      background-image:
+        radial-gradient(circle at 15% 8%, rgba(124, 58, 237, 0.18) 0 150px, transparent 151px),
+        radial-gradient(circle at 86% 12%, rgba(165, 107, 255, 0.28) 0 150px, transparent 151px),
+        radial-gradient(circle at 54% 4%, rgba(255, 211, 107, 0.24) 0 100px, transparent 101px);
+    }
+
+    .page-kicker {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      color: rgba(58, 15, 82, 0.68);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .devices {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1280px 370px;
+      gap: 38px;
+      align-items: start;
+    }
+
+    .browser,
+    .phone-frame {
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid rgba(53, 19, 66, 0.12);
+      box-shadow: var(--heavy-shadow);
+    }
+
+    .browser {
+      border-radius: 28px;
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 20px;
+      background: #eee0ff;
+      border-bottom: 1px solid rgba(53, 19, 66, 0.10);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .dot:nth-child(2) {
+      background: var(--butter);
+    }
+
+    .dot:nth-child(3) {
+      background: #83c9b8;
+    }
+
+    .site {
+      background: #fffafd;
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    .desktop {
+      min-height: 1080px;
+    }
+
+    .top-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      color: #fffdf7;
+      background: linear-gradient(90deg, var(--deep), var(--purple), var(--purple-2));
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 78px;
+      padding: 0 34px;
+      background: rgba(250, 245, 255, 0.94);
+      border-bottom: 1px solid rgba(58, 15, 82, 0.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 216px;
+      height: auto;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: rgba(58, 15, 82, 0.76);
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .cta,
+    .ghost,
+    .tiny-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .cta {
+      color: #fffdf7;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      border: 1px solid rgba(58, 15, 82, 0.12);
+      box-shadow: 0 14px 26px rgba(124, 58, 237, 0.22);
+    }
+
+    .ghost {
+      color: var(--deep);
+      border: 1px solid rgba(124, 58, 237, 0.26);
+      background: rgba(250, 245, 255, 0.86);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 620px;
+      padding: 38px 34px 34px;
+      background: linear-gradient(180deg, #f5efff 0%, #fffdf7 100%);
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 38px 34px 112px;
+      overflow: hidden;
+      border-radius: 30px;
+      box-shadow: var(--heavy-shadow);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(1.08) brightness(1.04);
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(250, 245, 255, 0.90), rgba(250, 245, 255, 0.48) 48%, rgba(250, 245, 255, 0.08)),
+        linear-gradient(180deg, transparent 42%, rgba(250, 245, 255, 0.84));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 590px;
+      padding: 54px 0 0 30px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 14px;
+      color: var(--deep);
+      border-radius: 999px;
+      background: rgba(234, 220, 255, 0.94);
+      border: 1px solid rgba(124, 58, 237, 0.20);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h2,
+    .listing-hero h2 {
+      margin: 20px 0 18px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 76px;
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .hero p,
+    .listing-hero p {
+      margin: 0 0 26px;
+      color: rgba(58, 15, 82, 0.68);
+      font-size: 21px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-word {
+      position: absolute;
+      z-index: 2;
+      left: 48px;
+      right: 48px;
+      bottom: 106px;
+      color: rgba(124, 58, 237, 0.16);
+      font-family: Arial Black, Arial, Helvetica, sans-serif;
+      font-size: 160px;
+      line-height: 0.72;
+      letter-spacing: -0.02em;
+      pointer-events: none;
+    }
+
+    .feature-pop {
+      position: absolute;
+      z-index: 3;
+      right: 72px;
+      top: 102px;
+      display: grid;
+      grid-template-columns: 148px 210px;
+      gap: 14px;
+      align-items: end;
+    }
+
+    .image-card,
+    .event-pop,
+    .quick-card,
+    .ticket,
+    .panel,
+    .mobile-card,
+    .mobile-ticket {
+      border: 1px solid rgba(53, 19, 66, 0.10);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+    }
+
+    .image-card {
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .image-card div {
+      padding: 14px 16px;
+    }
+
+    .image-card strong,
+    .event-pop strong {
+      display: block;
+      color: var(--deep);
+      font-size: 20px;
+      line-height: 1.06;
+    }
+
+    .image-card span,
+    .event-pop span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(23, 53, 45, 0.68);
+      font-size: 13px;
+    }
+
+    .event-pop {
+      width: 250px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fffdf7, #eee0ff);
+      transform: rotate(2deg);
+    }
+
+    .event-pop b,
+    .meta b,
+    .panel b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .quick-grid {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: -62px 34px 0;
+    }
+
+    .quick-card {
+      min-height: 150px;
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .quick-card:nth-child(1) {
+      background: #eadcff;
+    }
+
+    .quick-card:nth-child(2) {
+      background: #fff2c7;
+    }
+
+    .quick-card:nth-child(3) {
+      background: #dff5ff;
+    }
+
+    .quick-card:nth-child(4) {
+      background: #ffe2ed;
+    }
+
+    .quick-card b {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .quick-card strong {
+      display: block;
+      margin: 12px 0 7px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.02;
+    }
+
+    .quick-card span {
+      color: rgba(23, 53, 45, 0.68);
+      font-size: 14px;
+    }
+
+    .feature-section {
+      display: grid;
+      grid-template-columns: 390px 1fr;
+      gap: 36px;
+      padding: 48px 34px 44px;
+      background: linear-gradient(180deg, #fffdf7, #f7f0ff);
+    }
+
+    .poster-stack {
+      position: relative;
+      min-height: 430px;
+    }
+
+    .poster-stack::before {
+      content: "";
+      position: absolute;
+      left: 42px;
+      top: 32px;
+      width: 286px;
+      height: 366px;
+      border-radius: 24px;
+      background: var(--purple);
+      opacity: 0.20;
+      transform: rotate(7deg);
+    }
+
+    .poster-stack img {
+      position: relative;
+      width: 286px;
+      border-radius: 24px;
+      box-shadow: var(--heavy-shadow);
+    }
+
+    .feature-copy {
+      padding-top: 22px;
+    }
+
+    .feature-copy h3 {
+      margin: 18px 0 14px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .feature-copy p {
+      max-width: 680px;
+      margin: 0 0 22px;
+      color: rgba(23, 53, 45, 0.70);
+      font-size: 18px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 720px;
+      margin-top: 22px;
+    }
+
+    .meta {
+      padding: 16px;
+      border-radius: 18px;
+      background: #fff5d5;
+      border: 1px solid rgba(53, 19, 66, 0.08);
+    }
+
+    .meta span {
+      display: block;
+      color: var(--deep);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .phone-frame {
+      border-radius: 42px;
+      padding: 14px;
+      background: #fffafd;
+    }
+
+    .phone {
+      min-height: 800px;
+      overflow: hidden;
+      border-radius: 30px;
+      background: #fffafd;
+      border: 1px solid rgba(53, 19, 66, 0.12);
+    }
+
+    .mobile-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 18px;
+      background: #fffafd;
+      border-bottom: 1px solid rgba(23, 53, 45, 0.10);
+    }
+
+    .mobile-nav img {
+      width: 145px;
+      border-radius: 0;
+    }
+
+    .hamburger {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background:
+        linear-gradient(var(--deep), var(--deep)) 50% 12px / 16px 2px no-repeat,
+        linear-gradient(var(--deep), var(--deep)) 50% 18px / 16px 2px no-repeat,
+        linear-gradient(var(--deep), var(--deep)) 50% 24px / 16px 2px no-repeat,
+        #eadcff;
+      border: 1px solid rgba(53, 19, 66, 0.10);
+    }
+
+    .mobile-hero {
+      min-height: 336px;
+      padding: 18px;
+      background: linear-gradient(180deg, #f1e8ff, #fffdf7);
+    }
+
+    .mobile-photo {
+      height: 180px;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .mobile-hero h2 {
+      margin: 16px 0 8px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: 0.96;
+    }
+
+    .mobile-hero p {
+      margin: 0 0 14px;
+      color: rgba(23, 53, 45, 0.68);
+      font-size: 14px;
+    }
+
+    .mobile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .tiny-cta {
+      min-height: 39px;
+      padding: 0 12px;
+      font-size: 13px;
+    }
+
+    .mobile-content {
+      padding: 18px;
+      background: #f6eeff;
+    }
+
+    .mobile-card {
+      margin-bottom: 12px;
+      padding: 16px;
+      border-radius: 20px;
+    }
+
+    .mobile-card strong {
+      display: block;
+      color: var(--deep);
+      font-size: 19px;
+    }
+
+    .mobile-card span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(23, 53, 45, 0.66);
+      font-size: 13px;
+    }
+
+    .mini-event {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .mini-event img {
+      height: 134px;
+      width: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .mini-event div {
+      padding: 14px;
+    }
+
+    .mini-event b {
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .listing {
+      min-height: 1080px;
+      background: #fffafd;
+    }
+
+    .listing-hero {
+      position: relative;
+      min-height: 420px;
+      padding: 46px 38px;
+      background: linear-gradient(135deg, #f2e8ff 0%, #fff8ea 50%, #f8efff 100%);
+      overflow: hidden;
+    }
+
+    .listing-hero::after {
+      content: "";
+      position: absolute;
+      right: 34px;
+      top: 46px;
+      width: 440px;
+      height: 290px;
+      border-radius: 34px;
+      background: url("https://www.magiskateatern.se/wp-content/uploads/2025/07/lokalen-fran-scenen-scaled.jpg") center / cover no-repeat;
+      box-shadow: var(--heavy-shadow);
+    }
+
+    .listing-hero .text {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .date-badge {
+      position: absolute;
+      z-index: 3;
+      right: 340px;
+      bottom: 42px;
+      width: 260px;
+      padding: 18px;
+      border-radius: 24px;
+      color: var(--deep);
+      background: #fff;
+      border: 1px solid rgba(53, 19, 66, 0.10);
+      box-shadow: var(--shadow);
+      transform: rotate(-2deg);
+    }
+
+    .date-badge b {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .date-badge strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+      line-height: 1.05;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      padding: 26px 38px 4px;
+      background: #fffafd;
+    }
+
+    .pill {
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(23, 53, 45, 0.12);
+      background: #fff;
+      color: rgba(23, 53, 45, 0.74);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .pill.active {
+      color: #fffdf7;
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+
+    .event-layout {
+      display: grid;
+      grid-template-columns: 1fr 365px;
+      gap: 24px;
+      padding: 24px 38px 44px;
+    }
+
+    .ticket-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .ticket {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 174px;
+      padding: 16px;
+      border-radius: 26px;
+    }
+
+    .ticket:nth-child(1) {
+      background: #f0e3ff;
+    }
+
+    .ticket:nth-child(2) {
+      background: #fff4d3;
+    }
+
+    .ticket:nth-child(3) {
+      background: #edf8ff;
+    }
+
+    .ticket img {
+      width: 160px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .ticket h3 {
+      margin: 0 0 6px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      line-height: 1.02;
+    }
+
+    .ticket p {
+      max-width: 520px;
+      margin: 0 0 12px;
+      color: rgba(23, 53, 45, 0.68);
+      font-size: 15px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chips span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--deep);
+      background: rgba(124, 58, 237, 0.16);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 22px;
+      border-radius: 26px;
+    }
+
+    .panel h3 {
+      margin: 0 0 9px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      line-height: 1.04;
+    }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: rgba(23, 53, 45, 0.66);
+      font-size: 14px;
+    }
+
+    .panel.purple {
+      background: #eadcff;
+    }
+
+    .panel.mint {
+      background: #f1e8ff;
+    }
+
+    .field {
+      height: 44px;
+      margin-top: 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(53, 19, 66, 0.10);
+    }
+
+    .mobile-listing-hero {
+      padding: 18px;
+      background: linear-gradient(135deg, #f1e8ff, #fff6ea);
+    }
+
+    .mobile-listing-hero .mobile-photo {
+      height: 168px;
+    }
+
+    .mobile-listing-hero h2 {
+      margin: 16px 0 8px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 37px;
+      line-height: 0.98;
+    }
+
+    .mobile-filters {
+      display: flex;
+      gap: 8px;
+      padding: 14px 18px 0;
+      background: #fffafd;
+    }
+
+    .mobile-ticket {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 20px;
+    }
+
+    .mobile-ticket img {
+      width: 96px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .mobile-ticket h3 {
+      margin: 0 0 6px;
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.04;
+    }
+
+    .mobile-ticket p {
+      margin: 0 0 9px;
+      color: rgba(23, 53, 45, 0.66);
+      font-size: 12px;
+    }
+
+    .booking-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, var(--deep), var(--purple));
+      color: #fffdf7;
+    }
+
+    .booking-bar strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .booking-bar span {
+      color: rgba(255, 253, 247, 0.66);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <header class="board-head">
+      <div>
+        <h1>Magiska Teatern light redesign</h1>
+        <p>Ny riktning: ljus, vänlig och sagolik, med lila som glad accent och riktiga bilder som gör platsen varm och trovärdig.</p>
+      </div>
+      <div class="palette" aria-label="Färgpalett">
+        <span class="swatch" style="background:#fff8ea"></span>
+        <span class="swatch" style="background:#8f55e8"></span>
+        <span class="swatch" style="background:#ff5b9e"></span>
+        <span class="swatch" style="background:#ffd36b"></span>
+        <span class="swatch" style="background:#71b7ec"></span>
+        <span class="swatch" style="background:#d9ef38"></span>
+      </div>
+    </header>
+
+    <section class="page">
+      <div class="page-kicker">
+        <span>Page 1 / Startsida</span>
+        <span>Desktop + mobil</span>
+      </div>
+      <div class="devices">
+        <div class="browser">
+          <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="site desktop">
+            <div class="top-ribbon">Teater, bio, barnkalas och magiska event i Vretstorp</div>
+            <nav class="nav">
+              <div class="brand">
+                <img src="mockup-assets/logga-transparent.png" alt="Magiska Teatern">
+              </div>
+              <div class="nav-links">
+                <span>Om huset</span>
+                <span>Evenemang</span>
+                <span>Teatergrupper</span>
+                <span>Hyr teatern</span>
+                <span>Kontakt</span>
+                <span class="cta">Köp biljett</span>
+              </div>
+            </nav>
+            <section class="hero">
+              <div class="hero-photo">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/07/teaterniregn-scaled.jpg" alt="Magiska Teatern i Vretstorp">
+              </div>
+              <div class="hero-content">
+                <span class="eyebrow">Där drömmar blir verklighet</span>
+                <h2>En plats för scen, saga och skratt.</h2>
+                <p>Teatergrupper, bioklubb, föreställningar och egna event i ett historiskt hus med väldigt mycket personlighet.</p>
+                <div class="hero-actions">
+                  <span class="cta">Se evenemang</span>
+                  <span class="ghost">Hyr lokalen</span>
+                </div>
+              </div>
+              <div class="hero-word">MAGISKA</div>
+              <div class="feature-pop">
+                <div class="image-card">
+                  <img src="https://www.magiskateatern.se/wp-content/uploads/2025/09/IMG_20220726_182253-scaled.jpg" alt="Kostym och rekvisita">
+                  <div>
+                    <strong>Rekvisita</strong>
+                    <span>Kostym, sagor och specialbyggda detaljer.</span>
+                  </div>
+                </div>
+                <div class="event-pop">
+                  <b>Nästa på scen</b>
+                  <strong>Teaterkonsert 22 mars kl 14:00</strong>
+                  <span>Köp biljett eller läs mer.</span>
+                </div>
+              </div>
+            </section>
+            <section class="quick-grid">
+              <div class="quick-card">
+                <b>Spela</b>
+                <strong>Teatergrupper</strong>
+                <span>Dansdrama, barnteater, stora gruppen och vuxengrupp.</span>
+              </div>
+              <div class="quick-card">
+                <b>Se</b>
+                <strong>Bioklubben</strong>
+                <span>Filmvisningar i Vretstorps gamla biograf.</span>
+              </div>
+              <div class="quick-card">
+                <b>Samlas</b>
+                <strong>Hyr lokalen</strong>
+                <span>Fest, föreställning, konferens eller show.</span>
+              </div>
+              <div class="quick-card">
+                <b>Skapa</b>
+                <strong>Egna event</strong>
+                <span>Barnkalas, magishow, smink och temaäventyr.</span>
+              </div>
+            </section>
+            <section class="feature-section">
+              <div class="poster-stack">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/12/Kunde-jag-folja-dig-22-mars.png" alt="Teaterkonsert affisch">
+              </div>
+              <div class="feature-copy">
+                <span class="eyebrow">Kommande evenemang</span>
+                <h3>Biljetter, anmälan och förfrågan utan att behöva leta.</h3>
+                <p>Startsidan kan vara glad och inbjudande samtidigt som den håller hårt i sajtens jobb: leda vidare till biljetter, teatergrupper, bioklubben, lokalhyra och kontakt.</p>
+                <span class="cta">Köp biljetter</span>
+                <div class="meta-row">
+                  <div class="meta"><b>Tid</b><span>Söndag 22 mars, 14:00</span></div>
+                  <div class="meta"><b>Plats</b><span>Askersundsvägen 30</span></div>
+                  <div class="meta"><b>Pris</b><span>250 kr / 100 kr medlem</span></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone">
+            <nav class="mobile-nav">
+              <img src="mockup-assets/logga-transparent.png" alt="Magiska Teatern">
+              <span class="hamburger"></span>
+            </nav>
+            <section class="mobile-hero">
+              <div class="mobile-photo">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/07/teaterniregn-scaled.jpg" alt="Magiska Teatern">
+              </div>
+              <h2>Scen, saga och skratt.</h2>
+              <p>En varmare mobilstart med snabba vägar vidare.</p>
+              <div class="mobile-actions">
+                <span class="tiny-cta cta">Biljetter</span>
+                <span class="tiny-cta ghost">Hyr lokal</span>
+              </div>
+            </section>
+            <section class="mobile-content">
+              <div class="mobile-card">
+                <strong>Teatergrupper VT 2026</strong>
+                <span>Dansdrama, barnteater och vuxengrupp. Terminsavgift 750 kr.</span>
+              </div>
+              <div class="mobile-card mini-event">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/12/Kunde-jag-folja-dig-22-mars.png" alt="Teaterkonsert affisch">
+                <div>
+                  <b>Nästa evenemang</b>
+                  <strong>Teaterkonsert: Kunde jag följa dig</strong>
+                  <span>Söndag 22 mars kl 14:00</span>
+                </div>
+              </div>
+              <div class="mobile-card">
+                <strong>Snabba val</strong>
+                <span>Bioklubben, Hyr teatern, Rekvisita, Kontakt.</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-kicker">
+        <span>Page 2 / Evenemang & bokning</span>
+        <span>Desktop + mobil</span>
+      </div>
+      <div class="devices">
+        <div class="browser">
+          <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="site desktop listing">
+            <div class="top-ribbon">Köp biljett, anmäl kurs eller fråga om lokalen</div>
+            <nav class="nav">
+              <div class="brand">
+                <img src="mockup-assets/logga-transparent.png" alt="Magiska Teatern">
+              </div>
+              <div class="nav-links">
+                <span>Alla evenemang</span>
+                <span>Kurser</span>
+                <span>Bio</span>
+                <span>Hyr event</span>
+                <span class="cta">Boka nu</span>
+              </div>
+            </nav>
+            <section class="listing-hero">
+              <div class="text">
+                <span class="eyebrow">Evenemang och kurser</span>
+                <h2>Hitta nästa kväll, kurs eller äventyr i huset.</h2>
+                <p>En ljusare evenemangsyta gör det lättare att skanna det som går att boka, anmäla sig till eller fråga om.</p>
+              </div>
+              <div class="date-badge">
+                <b>Närmast nu</b>
+                <strong>Teaterkonsert 22 mars kl 14:00</strong>
+              </div>
+            </section>
+            <div class="filters">
+              <span class="pill active">Alla</span>
+              <span class="pill">Biljetter</span>
+              <span class="pill">Kurser</span>
+              <span class="pill">Barn</span>
+              <span class="pill">Hyrbart</span>
+            </div>
+            <section class="event-layout">
+              <div class="ticket-list">
+                <article class="ticket">
+                  <img src="https://www.magiskateatern.se/wp-content/uploads/2025/12/Kunde-jag-folja-dig-22-mars.png" alt="Teaterkonsert affisch">
+                  <div>
+                    <h3>Teaterkonsert: Kunde jag följa dig</h3>
+                    <p>En föreställning om Karin Boyes liv och dikter, med tonsatt poesi.</p>
+                    <div class="chips"><span>22 mars</span><span>14:00</span><span>Biljetter</span></div>
+                  </div>
+                  <span class="cta">Köp</span>
+                </article>
+                <article class="ticket">
+                  <img src="https://www.magiskateatern.se/wp-content/uploads/2024/09/kalas.jpg" alt="Barnkalas på teatern">
+                  <div>
+                    <h3>Teatergrupper för barn</h3>
+                    <p>Dansdrama, lilla och stora teatergruppen med lek, fantasi och scenmod.</p>
+                    <div class="chips"><span>VT 2026</span><span>750 kr</span><span>Anmälan</span></div>
+                  </div>
+                  <span class="cta">Anmäl</span>
+                </article>
+                <article class="ticket">
+                  <img src="https://www.magiskateatern.se/wp-content/uploads/2025/07/lokalen-fran-scenen-scaled.jpg" alt="Teatersalen">
+                  <div>
+                    <h3>Hyr teatern för ditt event</h3>
+                    <p>Fest, konferens, filmvisning, föreställning eller en helt egen magisk kväll.</p>
+                    <div class="chips"><span>150 platser</span><span>Bar</span><span>Scen</span></div>
+                  </div>
+                  <span class="cta">Fråga</span>
+                </article>
+              </div>
+              <aside class="side">
+                <div class="panel purple">
+                  <b>Snabb kontakt</b>
+                  <h3>Vad vill du göra?</h3>
+                  <p>Formuläret kan styra frågor om biljetter, kurser, lokalen och rekvisita till rätt kontaktflöde.</p>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <div class="field"></div>
+                  <span class="cta" style="margin-top:14px;">Skicka förfrågan</span>
+                </div>
+                <div class="panel mint">
+                  <b>Hitta hit</b>
+                  <h3>Mitt i Vretstorp</h3>
+                  <p>Askersundsvägen 30. Nära E20, buss och parkering.</p>
+                  <span class="ghost">Visa vägbeskrivning</span>
+                </div>
+              </aside>
+            </section>
+          </div>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone">
+            <nav class="mobile-nav">
+              <img src="mockup-assets/logga-transparent.png" alt="Magiska Teatern">
+              <span class="hamburger"></span>
+            </nav>
+            <section class="mobile-listing-hero">
+              <div class="mobile-photo">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/07/lokalen-fran-scenen-scaled.jpg" alt="Teatersal">
+              </div>
+              <h2>Evenemang och kurser</h2>
+              <p>Biljetter, anmälan och förfrågningar på samma plats.</p>
+            </section>
+            <div class="mobile-filters">
+              <span class="pill active">Alla</span>
+              <span class="pill">Biljetter</span>
+              <span class="pill">Kurser</span>
+            </div>
+            <section class="mobile-content">
+              <article class="mobile-ticket">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/12/Kunde-jag-folja-dig-22-mars.png" alt="Teaterkonsert affisch">
+                <div>
+                  <h3>Kunde jag följa dig</h3>
+                  <p>22 mars kl 14:00. Teaterkonsert om Karin Boye.</p>
+                  <span class="tiny-cta cta">Köp biljett</span>
+                </div>
+              </article>
+              <article class="mobile-ticket">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2024/09/kalas.jpg" alt="Barnkalas">
+                <div>
+                  <h3>Teatergrupper VT26</h3>
+                  <p>Grupper för barn, unga och vuxna.</p>
+                  <span class="tiny-cta ghost">Anmäl intresse</span>
+                </div>
+              </article>
+              <article class="mobile-ticket">
+                <img src="https://www.magiskateatern.se/wp-content/uploads/2025/07/lokalen-fran-scenen-scaled.jpg" alt="Teatersalen">
+                <div>
+                  <h3>Hyr lokalen</h3>
+                  <p>Scen, bar, loger och plats för 150.</p>
+                  <span class="tiny-cta ghost">Skicka fråga</span>
+                </div>
+              </article>
+            </section>
+            <div class="booking-bar">
+              <div><strong>Behöver du hjälp?</strong><span>emma@magiskateatern.se</span></div>
+              <span class="tiny-cta cta">Kontakt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
