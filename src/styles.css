@@ -1003,6 +1003,13 @@ select {
   gap: 18px;
 }
 
+.format-grid .info-card h3 {
+  max-width: 100%;
+  font-size: clamp(1.35rem, 1.65vw, 1.9rem);
+  line-height: 1.02;
+  overflow-wrap: anywhere;
+}
+
 .portal-window.tall {
   min-height: clamp(460px, 45vw, 680px);
 }
