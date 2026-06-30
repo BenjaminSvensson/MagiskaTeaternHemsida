@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Magiska Teatern</title>
+    <script>
+      (function () {
+        var repoBase = "/MagiskaTeaternHemsida";
+        var hasRepoBase = window.location.pathname === repoBase || window.location.pathname.indexOf(repoBase + "/") === 0;
+        var base = hasRepoBase ? repoBase : "";
+        var path = window.location.pathname.slice(base.length) || "/";
+        if (path.charAt(path.length - 1) !== "/") {
+          path += "/";
+        }
+
+        var routes = {
+          "/": "#/hem",
+          "/evenemang/": "#/evenemang",
+          "/evenemang/kommande-evenemang/": "#/evenemang",
+          "/kalender-2/": "#/evenemang",
+          "/bioklubben-varterminen-2026/": "#/evenemang",
+          "/teatergrupper-pa-magiska-teatern/": "#/evenemang",
+          "/teatergrupper-vt2026/": "#/evenemang",
+          "/den-magiska-teaterbyggnaden/": "#/huset",
+          "/om-magiska-teatern/": "#/huset",
+          "/scenkonstforening/": "#/engagera",
+          "/sponsorer-och-samarbeten/": "#/engagera",
+          "/sponsorer-och-samarbeten/bli-sponsor/": "#/engagera",
+          "/sponsorer-och-samarbeten/bli-volontar/": "#/engagera",
+          "/hyr-lokal-event-eller-rekvisita/": "#/hyra",
+          "/hyr-teaterlokal/": "#/hyra",
+          "/hyr-ett-eget-event/": "#/hyra",
+          "/hyr-kostym-och-rekvisita/": "#/hyra",
+          "/smink-och-kostym/": "#/hyra",
+          "/magiska-barnkalas/": "#/hyra",
+          "/teaterlokalen/": "#/hyra",
+          "/halloween-hos-oss/": "#/hyra",
+          "/hitta-hit/": "#/hitta",
+          "/kontakta-oss/": "#/hitta",
+          "/foresla-evenemang/": "#/evenemang"
+        };
+
+        window.location.replace(base + "/" + (routes[path] || "#/hem"));
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Skickar dig vidare till Magiska Teatern...</p>
+  </body>
+</html>

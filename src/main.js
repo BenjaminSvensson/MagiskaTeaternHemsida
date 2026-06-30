@@ -210,9 +210,22 @@ function setupFormsAndActions() {
       const form = event.currentTarget;
       const status = form.querySelector(".form-status");
       const data = new FormData(form);
-      const type = data.get("type");
-      status.textContent = `Tack! F\u00f6rfr\u00e5gan om ${String(type).toLowerCase()} \u00e4r redo att skickas vidare.`;
-      showToast("F\u00f6rfr\u00e5gan sparad i prototypen.");
+      const type = String(data.get("type") || "Kontakt").trim();
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const message = String(data.get("message") || "").trim();
+      const recipient = form.dataset.contactEmail || "emma@magiskateatern.se";
+      const subject = `Magiska Teatern: ${type}`;
+      const body = [
+        `Arende: ${type}`,
+        `Namn: ${name}`,
+        `E-post: ${email}`,
+        "",
+        message || "Meddelande:",
+      ].join("\n");
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.textContent = `Din f\u00f6rfr\u00e5gan om ${type.toLowerCase()} har flyttats till ditt mejlprogram.`;
+      showToast("Mejlf\u00f6rslag \u00f6ppnat.");
       form.reset();
     });
   });

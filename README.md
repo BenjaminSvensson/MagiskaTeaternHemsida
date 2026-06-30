@@ -32,3 +32,7 @@ Publika sajten laser bara publicerat innehall. Den skickar inga hemliga tokens t
 Event forsvinner automatiskt fran publika sajten nar `endDateTime` eller `startDateTime` har passerat. De ligger kvar i Sanity som historik.
 
 Se `studio/README.md` for installation och deploy av admin.
+
+## Publicering
+
+Se `docs/PUBLISHING_READINESS.md` for aktuell lanseringschecklista, gamla URL:er som mappas om, och allt som fortfarande behover agaren/betalning/kontaktmetoder innan sidan ersatter originalet.
