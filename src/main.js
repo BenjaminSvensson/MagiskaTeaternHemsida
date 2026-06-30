@@ -165,18 +165,20 @@ function setupParallaxFrames() {
 }
 
 function setupFilters() {
-  const filters = document.querySelectorAll(".filter");
+  document.querySelectorAll(".events").forEach((section) => {
+    const filters = section.querySelectorAll(".filter");
 
-  filters.forEach((filter) => {
-    filter.addEventListener("click", () => {
-      const cards = document.querySelectorAll(".event-card");
-      filters.forEach((item) => item.classList.remove("active"));
-      filter.classList.add("active");
+    filters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        const cards = section.querySelectorAll(".event-card");
+        filters.forEach((item) => item.classList.remove("active"));
+        filter.classList.add("active");
 
-      const selected = filter.dataset.filter;
-      cards.forEach((card) => {
-        const categories = card.dataset.category?.split(" ") ?? [];
-        card.classList.toggle("is-hidden", selected !== "alla" && !categories.includes(selected));
+        const selected = filter.dataset.filter;
+        cards.forEach((card) => {
+          const categories = card.dataset.category?.split(" ") ?? [];
+          card.classList.toggle("is-hidden", selected !== "alla" && !categories.includes(selected));
+        });
       });
     });
   });
@@ -189,15 +191,17 @@ function setupFormsAndActions() {
     });
   });
 
-  document.querySelector("[data-contact-form]")?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const status = form.querySelector(".form-status");
-    const data = new FormData(form);
-    const type = data.get("type");
-    status.textContent = `Tack! F\u00f6rfr\u00e5gan om ${String(type).toLowerCase()} \u00e4r redo att skickas vidare.`;
-    showToast("F\u00f6rfr\u00e5gan sparad i prototypen.");
-    form.reset();
+  document.querySelectorAll("[data-contact-form]").forEach((contactForm) => {
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const status = form.querySelector(".form-status");
+      const data = new FormData(form);
+      const type = data.get("type");
+      status.textContent = `Tack! F\u00f6rfr\u00e5gan om ${String(type).toLowerCase()} \u00e4r redo att skickas vidare.`;
+      showToast("F\u00f6rfr\u00e5gan sparad i prototypen.");
+      form.reset();
+    });
   });
 }
 

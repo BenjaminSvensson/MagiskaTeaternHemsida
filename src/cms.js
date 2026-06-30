@@ -171,7 +171,7 @@ function eventLabel(event) {
   return [date, time && `kl ${time}`].filter(Boolean).join(" ");
 }
 
-function renderEventCard(event, index = 0) {
+function renderEventCard(event, index = 0, options = {}) {
   const date = formatDate(event.startDateTime);
   const time = formatTime(event.startDateTime);
   const image = imageUrl(event.image);
@@ -182,10 +182,10 @@ function renderEventCard(event, index = 0) {
   const category = event.category || "biljetter";
   const target = url.startsWith(window.location.origin) || url.startsWith("mailto:") ? "" : ' target="_blank" rel="noreferrer"';
   const isNext = index === 0;
-  const id = isNext ? "next-event" : eventDomId(event);
+  const id = options.markNextTarget ? (isNext ? "next-event" : eventDomId(event)) : "";
 
   return `
-    <article class="event-card reveal is-visible${isNext ? " is-next-event" : ""}" id="${escapeHtml(id)}" data-category="${escapeHtml(category)}">
+    <article class="event-card reveal is-visible${isNext ? " is-next-event" : ""}"${id ? ` id="${escapeHtml(id)}"` : ""} data-category="${escapeHtml(category)}">
       <div class="event-image" data-parallax-frame>
         <img src="${escapeHtml(image)}" alt="${escapeHtml(alt)}" />
       </div>
@@ -205,11 +205,17 @@ function renderEventCard(event, index = 0) {
 }
 
 function renderEvents(events = []) {
-  const eventList = document.querySelector(".event-list");
   const sortedEvents = upcomingEvents(events);
-  if (!eventList || !sortedEvents.length) return;
+  if (!sortedEvents.length) return;
 
-  eventList.innerHTML = sortedEvents.map(renderEventCard).join("");
+  document.querySelectorAll("[data-event-list]").forEach((eventList) => {
+    const isHomeList = eventList.dataset.eventList === "home";
+    const listEvents = isHomeList ? sortedEvents.slice(0, 3) : sortedEvents;
+    eventList.innerHTML = listEvents
+      .map((event, index) => renderEventCard(event, index, {markNextTarget: !isHomeList}))
+      .join("");
+  });
+
   updateFeaturedEvent(sortedEvents);
   scrollToNextEventIfRequested();
 }

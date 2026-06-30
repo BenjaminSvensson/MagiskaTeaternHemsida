@@ -95,6 +95,97 @@
             </div>
           </section>
 
+          <section class="events home-events section" aria-labelledby="home-events-title">
+            <div class="events-head reveal">
+              <div>
+                <p class="eyebrow">Aktuellt</p>
+                <h2 id="home-events-title">Boka, anm&auml;l eller l&auml;gg i kalendern.</h2>
+              </div>
+              <p>
+                N&auml;rmaste evenemang, kurser och anm&auml;lningar syns direkt p&aring; startsidan. Alla kort kan
+                uppdateras fr&aring;n baksidan och sorteras automatiskt efter datum.
+              </p>
+            </div>
+
+            <div class="filter-row reveal" role="tablist" aria-label="Filtrera evenemang p&aring; startsidan">
+              <button class="filter active" type="button" data-filter="alla">Alla</button>
+              <button class="filter" type="button" data-filter="biljetter">Biljetter</button>
+              <button class="filter" type="button" data-filter="kurser">Kurser</button>
+              <button class="filter" type="button" data-filter="bio">Bio</button>
+              <button class="filter" type="button" data-filter="barn">Barn</button>
+            </div>
+
+            <div class="event-layout">
+              <div class="event-list" data-event-list="home">
+                <article class="event-card reveal is-next-event" data-category="biljetter">
+                  <div class="event-image poster-frame" data-parallax-frame>
+                    <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">N&auml;sta evenemang</p>
+                    <h3>Teaterkonsert: Kunde jag f&ouml;lja dig</h3>
+                    <p>Teaterkonsert om Karin Boyes liv och dikter. Visas p&aring; teatern 22 mars kl 14:00.</p>
+                    <div class="chips"><span>22 mars</span><span>14:00</span><span>Biljetter</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/evenemang/kommande-evenemang/">K&ouml;p</a>
+                </article>
+
+                <article class="event-card reveal" data-category="kurser barn">
+                  <div class="event-image" data-parallax-frame>
+                    <img src="/mockup-assets/kalas.jpg" alt="Barnkalas och teaterlek p&aring; Magiska Teatern" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">V&aring;rterminen 2026</p>
+                    <h3>Teatergrupper p&aring; Magiska Teatern</h3>
+                    <p>Dansdramalek, lilla teatergruppen, stora teatergruppen och vuxengrupp. Terminsavgift 750 kr.</p>
+                    <div class="chips"><span>Start 19 jan</span><span>750 kr</span><span>Anm&auml;lan</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/teatergrupper-pa-magiska-teatern/">Anm&auml;l</a>
+                </article>
+
+                <article class="event-card reveal" data-category="bio barn">
+                  <div class="event-image" data-parallax-frame>
+                    <img src="/mockup-assets/lokalen-fran-scenen.jpg" alt="Vretstorps gamla biograf" />
+                  </div>
+                  <div class="event-body">
+                    <p class="micro">Bioklubben VT 2026</p>
+                    <h3>Bio i Vretstorps gamla biograf</h3>
+                    <p>Start 19 januari kl 15:30. Stor bioduk, bra ljud och mysiga biostolar.</p>
+                    <div class="chips"><span>19 jan</span><span>15:30</span><span>Bio</span></div>
+                  </div>
+                  <a class="button primary" href="https://www.magiskateatern.se/bioklubben-varterminen-2026/">L&auml;s mer</a>
+                </article>
+              </div>
+
+              <aside class="booking-panel reveal">
+                <p class="eyebrow">Snabb kontakt</p>
+                <h3>Vad vill du g&ouml;ra?</h3>
+                <form class="contact-form" data-contact-form>
+                  <label>
+                    &Auml;rende
+                    <select name="type">
+                      <option>Biljetter</option>
+                      <option>Teatergrupp</option>
+                      <option>Bioklubben</option>
+                      <option>Hyr lokalen</option>
+                      <option>Rekvisita och kostym</option>
+                    </select>
+                  </label>
+                  <label>
+                    Namn
+                    <input name="name" type="text" placeholder="Ditt namn" required />
+                  </label>
+                  <label>
+                    E-post
+                    <input name="email" type="email" placeholder="namn@example.com" required />
+                  </label>
+                  <button class="button primary" type="submit">Skicka f&ouml;rfr&aring;gan</button>
+                  <p class="form-status" aria-live="polite"></p>
+                </form>
+              </aside>
+            </div>
+          </section>
+
           <section class="quick-paths section" aria-labelledby="paths-title">
             <div class="section-heading reveal">
               <p class="eyebrow">Snabba v&auml;gar</p>
@@ -161,7 +252,7 @@
             </div>
 
             <div class="event-layout">
-              <div class="event-list">
+              <div class="event-list" data-event-list="full">
                 <article class="event-card reveal is-next-event" id="next-event" data-category="biljetter">
                   <div class="event-image poster-frame" data-parallax-frame>
                     <img src="/mockup-assets/event-affisch.png" alt="Affisch f&ouml;r Teaterkonsert: Kunde jag f&ouml;lja dig" />
