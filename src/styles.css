@@ -1468,6 +1468,27 @@ select {
   gap: 16px;
 }
 
+.home-feature,
+.page-hero,
+.page-hero.soft-hero,
+.rent {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.home-feature,
+.rent {
+  padding-inline: clamp(8px, 3vw, 44px);
+}
+
+.page-hero {
+  padding-inline: clamp(8px, 4vw, 54px);
+}
+
 @media (max-width: 1120px) {
   .page-hero,
   .home-feature,
