@@ -4,6 +4,8 @@ Senast uppdaterad: 2026-06-30.
 
 Det här dokumentet är en ärlig lanseringslista för nya sidan. Målet är att den ska vara lätt att visa för ägaren och använda som checklista innan den ersätter den gamla WordPress-sidan.
 
+För mer detaljerad mappning av gamla sidor och inlägg, se `docs/CONTENT_INVENTORY.md`.
+
 ## Nuvarande status
 
 Sidan är en statisk Vite/Three.js-sajt hostad via GitHub Pages. Den har hash-routes för:

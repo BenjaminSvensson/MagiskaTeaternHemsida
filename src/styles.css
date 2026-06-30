@@ -991,6 +991,16 @@ select {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.format-section .section-heading {
+  margin-bottom: 18px;
+}
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .portal-window.tall {
   min-height: clamp(460px, 45vw, 680px);
 }
@@ -1841,6 +1851,7 @@ select {
   .tier-section,
   .sponsor-grid,
   .supporter-grid,
+  .format-grid,
   .venue-gallery,
   .venue-gallery.theme-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1931,6 +1942,7 @@ select {
   .tier-section,
   .sponsor-grid,
   .supporter-grid,
+  .format-grid,
   .venue-gallery,
   .venue-gallery.theme-gallery,
   .association-section {
