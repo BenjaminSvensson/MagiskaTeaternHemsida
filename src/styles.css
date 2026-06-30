@@ -1122,17 +1122,17 @@ select {
 .site-header {
   border-color: rgba(124, 58, 237, 0.16);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(247, 239, 255, 0.5)),
-    linear-gradient(90deg, rgba(124, 58, 237, 0.12), rgba(255, 255, 255, 0.18) 50%, rgba(166, 108, 255, 0.15)),
-    rgba(255, 253, 247, 0.46);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(247, 239, 255, 0.54)),
+    linear-gradient(90deg, rgba(255, 253, 247, 0.86) 0%, rgba(255, 253, 247, 0.78) 17%, rgba(239, 228, 255, 0.78) 33%, rgba(199, 167, 255, 0.64) 70%, rgba(124, 58, 237, 0.52) 100%),
+    rgba(247, 239, 255, 0.64);
   backdrop-filter: blur(26px) saturate(1.22);
 }
 
 .site-header.is-scrolled {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(247, 239, 255, 0.58)),
-    linear-gradient(90deg, rgba(124, 58, 237, 0.14), rgba(255, 255, 255, 0.22) 50%, rgba(166, 108, 255, 0.18)),
-    rgba(255, 253, 247, 0.56);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(247, 239, 255, 0.62)),
+    linear-gradient(90deg, rgba(255, 253, 247, 0.9) 0%, rgba(255, 253, 247, 0.78) 17%, rgba(239, 228, 255, 0.82) 33%, rgba(199, 167, 255, 0.7) 70%, rgba(124, 58, 237, 0.58) 100%),
+    rgba(247, 239, 255, 0.7);
 }
 
 .nav-menu a.is-active:not(.button)::after {
