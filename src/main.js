@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import {setupCmsContent} from "./cms.js";
 
 const theaterExteriorUrl = new URL("../mockup-assets/teaterniregn.jpg", import.meta.url).href;
 const theaterRoomUrl = new URL("../mockup-assets/lokalen-fran-scenen.jpg", import.meta.url).href;
@@ -136,11 +137,11 @@ function setupTiltCards() {
 }
 
 function setupParallaxFrames() {
-  const frames = [...document.querySelectorAll("[data-parallax-frame]")];
-  if (!frames.length || prefersReducedMotion) return;
+  if (prefersReducedMotion) return;
 
   const update = () => {
     const viewport = window.innerHeight || 1;
+    const frames = [...document.querySelectorAll("[data-parallax-frame]")];
     frames.forEach((frame) => {
       const image = frame.querySelector("img");
       if (!image) return;
@@ -158,10 +159,10 @@ function setupParallaxFrames() {
 
 function setupFilters() {
   const filters = document.querySelectorAll(".filter");
-  const cards = document.querySelectorAll(".event-card");
 
   filters.forEach((filter) => {
     filter.addEventListener("click", () => {
+      const cards = document.querySelectorAll(".event-card");
       filters.forEach((item) => item.classList.remove("active"));
       filter.classList.add("active");
 
@@ -380,6 +381,7 @@ setupTiltCards();
 setupParallaxFrames();
 setupFilters();
 setupFormsAndActions();
+setupCmsContent();
 setupHeroScene()
   .catch(() => {
     document.querySelector(".hero-stage")?.classList.add("is-fallback");

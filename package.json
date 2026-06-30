@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "cms:dev": "npm --prefix studio run dev",
+    "cms:build": "npm --prefix studio run build",
+    "cms:deploy": "npm --prefix studio run deploy"
   },
   "dependencies": {
     "three": "^0.165.0",
